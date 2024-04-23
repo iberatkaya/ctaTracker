@@ -53,6 +53,7 @@
 		F43AC31E2BD751CF0093767E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F43AC3202BD751D00093767E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F43AC3232BD751D00093767E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F4EFBC492BD7549800CD7035 /* APIKey.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = APIKey.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +77,7 @@
 		F43AC2FE2BD751CE0093767E = {
 			isa = PBXGroup;
 			children = (
+				F4EFBC492BD7549800CD7035 /* APIKey.xcconfig */,
 				F43AC3092BD751CE0093767E /* ctaTracker */,
 				F43AC31B2BD751CF0093767E /* ctaTracker Watch App */,
 				F43AC3082BD751CE0093767E /* Products */,
