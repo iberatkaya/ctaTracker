@@ -81,6 +81,7 @@
 		F4EFBC642BD9E80C00CD7035 /* BusRoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRoutesView.swift; sourceTree = "<group>"; };
 		F4EFBC672BD9E83400CD7035 /* BusRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRepository.swift; sourceTree = "<group>"; };
 		F4EFBC692BD9EAC200CD7035 /* BusRouteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteDetailView.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +109,7 @@
 		F43AC2FE2BD751CE0093767E = {
 			isa = PBXGroup;
 			children = (
+				F4EFBC492BD7549800CD7035 /* APIKey.xcconfig */,
 				F43AC3092BD751CE0093767E /* ctaTracker */,
 				F43AC31B2BD751CF0093767E /* ctaTracker Watch App */,
 				F43AC3082BD751CE0093767E /* Products */,
