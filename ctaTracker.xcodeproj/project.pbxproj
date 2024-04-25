@@ -16,6 +16,16 @@
 		F43AC31F2BD751CF0093767E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AC31E2BD751CF0093767E /* ContentView.swift */; };
 		F43AC3212BD751D00093767E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43AC3202BD751D00093767E /* Assets.xcassets */; };
 		F43AC3242BD751D00093767E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43AC3232BD751D00093767E /* Preview Assets.xcassets */; };
+		F4EFBC4C2BD7565700CD7035 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F4EFBC4B2BD7565700CD7035 /* Alamofire */; };
+		F4EFBC4E2BD7565700CD7035 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F4EFBC4D2BD7565700CD7035 /* AlamofireDynamic */; };
+		F4EFBC512BD7566300CD7035 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F4EFBC502BD7566300CD7035 /* Alamofire */; };
+		F4EFBC532BD7566600CD7035 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F4EFBC522BD7566600CD7035 /* AlamofireDynamic */; };
+		F4EFBC542BD7566600CD7035 /* AlamofireDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = F4EFBC522BD7566600CD7035 /* AlamofireDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F4EFBC5D2BD75CBA00CD7035 /* GetRoutesAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC5C2BD75CBA00CD7035 /* GetRoutesAPIResponse.swift */; };
+		F4EFBC602BD9E2E600CD7035 /* BusRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC5F2BD9E2E600CD7035 /* BusRoutes.swift */; };
+		F4EFBC652BD9E80C00CD7035 /* BusRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC642BD9E80C00CD7035 /* BusRoutesView.swift */; };
+		F4EFBC682BD9E83400CD7035 /* BusRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC672BD9E83400CD7035 /* BusRepository.swift */; };
+		F4EFBC6A2BD9EAC200CD7035 /* BusRouteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC692BD9EAC200CD7035 /* BusRouteDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +50,17 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F4EFBC552BD7566600CD7035 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F4EFBC542BD7566600CD7035 /* AlamofireDynamic in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +75,13 @@
 		F43AC3202BD751D00093767E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F43AC3232BD751D00093767E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F4EFBC492BD7549800CD7035 /* APIKey.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = APIKey.xcconfig; sourceTree = "<group>"; };
+		F4EFBC582BD75A7800CD7035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F4EFBC5C2BD75CBA00CD7035 /* GetRoutesAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRoutesAPIResponse.swift; sourceTree = "<group>"; };
+		F4EFBC5F2BD9E2E600CD7035 /* BusRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRoutes.swift; sourceTree = "<group>"; };
+		F4EFBC642BD9E80C00CD7035 /* BusRoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRoutesView.swift; sourceTree = "<group>"; };
+		F4EFBC672BD9E83400CD7035 /* BusRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRepository.swift; sourceTree = "<group>"; };
+		F4EFBC692BD9EAC200CD7035 /* BusRouteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteDetailView.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +89,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4EFBC4C2BD7565700CD7035 /* Alamofire in Frameworks */,
+				F4EFBC4E2BD7565700CD7035 /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +98,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4EFBC512BD7566300CD7035 /* Alamofire in Frameworks */,
+				F4EFBC532BD7566600CD7035 /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +113,7 @@
 				F43AC3092BD751CE0093767E /* ctaTracker */,
 				F43AC31B2BD751CF0093767E /* ctaTracker Watch App */,
 				F43AC3082BD751CE0093767E /* Products */,
+				F4EFBC4F2BD7566300CD7035 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,8 +129,12 @@
 		F43AC3092BD751CE0093767E /* ctaTracker */ = {
 			isa = PBXGroup;
 			children = (
+				F4EFBC582BD75A7800CD7035 /* Info.plist */,
 				F43AC30A2BD751CE0093767E /* ctaTrackerApp.swift */,
 				F43AC30C2BD751CE0093767E /* ContentView.swift */,
+				F4EFBC662BD9E82400CD7035 /* Repository */,
+				F4EFBC612BD9E7EF00CD7035 /* Views */,
+				F4EFBC592BD75C9800CD7035 /* Models */,
 				F43AC30E2BD751CF0093767E /* Assets.xcassets */,
 				F43AC3102BD751CF0093767E /* Preview Content */,
 			);
@@ -131,6 +168,47 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		F4EFBC4F2BD7566300CD7035 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F4EFBC592BD75C9800CD7035 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F4EFBC5A2BD75CA600CD7035 /* API */,
+				F4EFBC5F2BD9E2E600CD7035 /* BusRoutes.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F4EFBC5A2BD75CA600CD7035 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				F4EFBC5C2BD75CBA00CD7035 /* GetRoutesAPIResponse.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		F4EFBC612BD9E7EF00CD7035 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F4EFBC642BD9E80C00CD7035 /* BusRoutesView.swift */,
+				F4EFBC692BD9EAC200CD7035 /* BusRouteDetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F4EFBC662BD9E82400CD7035 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				F4EFBC672BD9E83400CD7035 /* BusRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,6 +227,10 @@
 				F43AC31A2BD751CF0093767E /* PBXTargetDependency */,
 			);
 			name = ctaTracker;
+			packageProductDependencies = (
+				F4EFBC4B2BD7565700CD7035 /* Alamofire */,
+				F4EFBC4D2BD7565700CD7035 /* AlamofireDynamic */,
+			);
 			productName = ctaTracker;
 			productReference = F43AC3072BD751CE0093767E /* ctaTracker.app */;
 			productType = "com.apple.product-type.application";
@@ -160,12 +242,17 @@
 				F43AC3132BD751CF0093767E /* Sources */,
 				F43AC3142BD751CF0093767E /* Frameworks */,
 				F43AC3152BD751CF0093767E /* Resources */,
+				F4EFBC552BD7566600CD7035 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "ctaTracker Watch App";
+			packageProductDependencies = (
+				F4EFBC502BD7566300CD7035 /* Alamofire */,
+				F4EFBC522BD7566600CD7035 /* AlamofireDynamic */,
+			);
 			productName = "ctaTracker Watch App";
 			productReference = F43AC3172BD751CF0093767E /* ctaTracker Watch App.app */;
 			productType = "com.apple.product-type.application";
@@ -197,6 +284,9 @@
 				Base,
 			);
 			mainGroup = F43AC2FE2BD751CE0093767E;
+			packageReferences = (
+				F4EFBC4A2BD7565700CD7035 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = F43AC3082BD751CE0093767E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -234,6 +324,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F43AC30D2BD751CE0093767E /* ContentView.swift in Sources */,
+				F4EFBC652BD9E80C00CD7035 /* BusRoutesView.swift in Sources */,
+				F4EFBC6A2BD9EAC200CD7035 /* BusRouteDetailView.swift in Sources */,
+				F4EFBC682BD9E83400CD7035 /* BusRepository.swift in Sources */,
+				F4EFBC5D2BD75CBA00CD7035 /* GetRoutesAPIResponse.swift in Sources */,
+				F4EFBC602BD9E2E600CD7035 /* BusRoutes.swift in Sources */,
 				F43AC30B2BD751CE0093767E /* ctaTrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,6 +355,7 @@
 /* Begin XCBuildConfiguration section */
 		F43AC3252BD751D00093767E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4EFBC492BD7549800CD7035 /* APIKey.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -321,6 +417,7 @@
 		};
 		F43AC3262BD751D00093767E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4EFBC492BD7549800CD7035 /* APIKey.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -374,6 +471,7 @@
 		};
 		F43AC3282BD751D00093767E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4EFBC492BD7549800CD7035 /* APIKey.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -404,6 +502,7 @@
 		};
 		F43AC3292BD751D00093767E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4EFBC492BD7549800CD7035 /* APIKey.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -435,6 +534,7 @@
 		};
 		F43AC32C2BD751D00093767E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4EFBC492BD7549800CD7035 /* APIKey.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -445,6 +545,7 @@
 				DEVELOPMENT_TEAM = DQ7CFP6525;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ctaTracker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ctaTracker;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -468,6 +569,7 @@
 		};
 		F43AC32D2BD751D00093767E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4EFBC492BD7549800CD7035 /* APIKey.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -478,6 +580,7 @@
 				DEVELOPMENT_TEAM = DQ7CFP6525;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ctaTracker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ctaTracker;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -531,6 +634,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F4EFBC4A2BD7565700CD7035 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F4EFBC4B2BD7565700CD7035 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4EFBC4A2BD7565700CD7035 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		F4EFBC4D2BD7565700CD7035 /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4EFBC4A2BD7565700CD7035 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+		F4EFBC502BD7566300CD7035 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4EFBC4A2BD7565700CD7035 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		F4EFBC522BD7566600CD7035 /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4EFBC4A2BD7565700CD7035 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F43AC2FF2BD751CE0093767E /* Project object */;
 }
