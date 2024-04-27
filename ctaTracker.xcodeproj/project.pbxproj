@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F419472B2BDD451B000F374B /* BusRouteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947292BDD451B000F374B /* BusRouteEntity.swift */; };
 		F43AC30B2BD751CE0093767E /* ctaTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AC30A2BD751CE0093767E /* ctaTrackerApp.swift */; };
 		F43AC30D2BD751CE0093767E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AC30C2BD751CE0093767E /* ContentView.swift */; };
 		F43AC30F2BD751CF0093767E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43AC30E2BD751CF0093767E /* Assets.xcassets */; };
@@ -30,7 +31,6 @@
 		F4EFBC6E2BD9ED1100CD7035 /* BusDirections.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC6D2BD9ED1100CD7035 /* BusDirections.swift */; };
 		F4EFBC702BD9F43500CD7035 /* FavoritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC6F2BD9F43400CD7035 /* FavoritesRepository.swift */; };
 		F4EFBC742BD9F4E800CD7035 /* Favorites.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC722BD9F4E800CD7035 /* Favorites.xcdatamodeld */; };
-		F4EFBC7F2BDC859300CD7035 /* BusRouteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC7E2BDC858D00CD7035 /* BusRouteEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F41947292BDD451B000F374B /* BusRouteEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusRouteEntity.swift; sourceTree = "<group>"; };
 		F43AC3072BD751CE0093767E /* ctaTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ctaTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F43AC30A2BD751CE0093767E /* ctaTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ctaTrackerApp.swift; sourceTree = "<group>"; };
 		F43AC30C2BD751CE0093767E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -90,7 +91,6 @@
 		F4EFBC6D2BD9ED1100CD7035 /* BusDirections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDirections.swift; sourceTree = "<group>"; };
 		F4EFBC6F2BD9F43400CD7035 /* FavoritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRepository.swift; sourceTree = "<group>"; };
 		F4EFBC732BD9F4E800CD7035 /* Favorites.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Favorites.xcdatamodel; sourceTree = "<group>"; };
-		F4EFBC7E2BDC858D00CD7035 /* BusRouteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +115,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F419472A2BDD451B000F374B /* CoreDataEntities */ = {
+			isa = PBXGroup;
+			children = (
+				F41947292BDD451B000F374B /* BusRouteEntity.swift */,
+			);
+			path = CoreDataEntities;
+			sourceTree = "<group>";
+		};
 		F43AC2FE2BD751CE0093767E = {
 			isa = PBXGroup;
 			children = (
@@ -141,7 +149,7 @@
 				F4EFBC582BD75A7800CD7035 /* Info.plist */,
 				F43AC30A2BD751CE0093767E /* ctaTrackerApp.swift */,
 				F43AC30C2BD751CE0093767E /* ContentView.swift */,
-				F4EFBC792BDC813500CD7035 /* CoreDataEntities */,
+				F419472A2BDD451B000F374B /* CoreDataEntities */,
 				F4EFBC712BD9F4D400CD7035 /* CoreData */,
 				F4EFBC662BD9E82400CD7035 /* Repositories */,
 				F4EFBC612BD9E7EF00CD7035 /* Views */,
@@ -229,15 +237,6 @@
 				F4EFBC722BD9F4E800CD7035 /* Favorites.xcdatamodeld */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		F4EFBC792BDC813500CD7035 /* CoreDataEntities */ = {
-			isa = PBXGroup;
-			children = (
-				F4EFBC7E2BDC858D00CD7035 /* BusRouteEntity.swift */,
-			);
-			name = CoreDataEntities;
-			path = ../CoreDataEntities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,13 +354,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4EFBC6C2BD9ECDE00CD7035 /* GetBusDirectionsAPIResponse.swift in Sources */,
+				F419472B2BDD451B000F374B /* BusRouteEntity.swift in Sources */,
 				F43AC30D2BD751CE0093767E /* ContentView.swift in Sources */,
 				F4EFBC652BD9E80C00CD7035 /* BusRoutesView.swift in Sources */,
 				F4EFBC6A2BD9EAC200CD7035 /* BusRouteDetailView.swift in Sources */,
 				F4EFBC682BD9E83400CD7035 /* BusRepository.swift in Sources */,
 				F4EFBC5D2BD75CBA00CD7035 /* GetBusRoutesAPIResponse.swift in Sources */,
 				F4EFBC602BD9E2E600CD7035 /* BusRoutes.swift in Sources */,
-				F4EFBC7F2BDC859300CD7035 /* BusRouteEntity.swift in Sources */,
 				F4EFBC6E2BD9ED1100CD7035 /* BusDirections.swift in Sources */,
 				F4EFBC742BD9F4E800CD7035 /* Favorites.xcdatamodeld in Sources */,
 				F43AC30B2BD751CE0093767E /* ctaTrackerApp.swift in Sources */,
