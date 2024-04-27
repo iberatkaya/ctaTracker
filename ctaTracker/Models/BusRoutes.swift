@@ -7,7 +7,7 @@ class BusRoutes: ObservableObject, Observable {
     
     @Published var routes: [BusRoute]
     
-    static func fromDataObject(data: GetRoutesAPIResponse) -> BusRoutes {
+    static func fromDataObject(data: GetBusRoutesAPIResponse) -> BusRoutes {
         return BusRoutes(routes: data.bustimeResponse.routes.map({ BusRoute(number: $0.rt, name: $0.rtnm, color: $0.rtclr) }))
     }
 }
@@ -20,4 +20,12 @@ class BusRoute: Identifiable {
     }
     
     let number, name, color: String
+    
+    func toDataModel() -> BusRouteEntity {
+        let entity = BusRouteEntity()
+        entity.name = name
+        entity.color = color
+        entity.number = number
+        return entity
+    }
 }
