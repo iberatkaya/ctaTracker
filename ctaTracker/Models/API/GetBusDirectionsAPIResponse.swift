@@ -6,7 +6,7 @@
 import Foundation
 
 struct GetBusDirectionsAPIResponse: Codable {
-    let bustimeResponse: GetBustimeResponse
+    let bustimeResponse: GetBustimeAPIResponse
 
     enum CodingKeys: String, CodingKey {
         case bustimeResponse = "bustime-response"
@@ -14,11 +14,11 @@ struct GetBusDirectionsAPIResponse: Codable {
 }
 
 // MARK: - BustimeResponse
-struct GetBustimeResponse: Codable {
-    let directions: [GetDirection]
+struct GetBustimeAPIResponse: Codable {
+    let directions: [GetDirectionAPIResponse]
 }
 
 // MARK: - Direction
-struct GetDirection: Codable {
+struct GetDirectionAPIResponse: Codable {
     let dir: String
 }

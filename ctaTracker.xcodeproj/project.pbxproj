@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		F419472B2BDD451B000F374B /* BusRouteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947292BDD451B000F374B /* BusRouteEntity.swift */; };
+		F419472D2BDD54B4000F374B /* GetBusRouteStopsAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F419472C2BDD54B4000F374B /* GetBusRouteStopsAPIResponse.swift */; };
+		F419472F2BDD5547000F374B /* BusRouteStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = F419472E2BDD5547000F374B /* BusRouteStops.swift */; };
+		F41947322BDD59DD000F374B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947312BDD59DD000F374B /* Utils.swift */; };
+		F41947342BDD5F83000F374B /* GetBusStopPredictionsAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947332BDD5F83000F374B /* GetBusStopPredictionsAPIResponse.swift */; };
+		F41947362BDD5FBC000F374B /* BusStopPredictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947352BDD5FBC000F374B /* BusStopPredictions.swift */; };
+		F41947382BDD6209000F374B /* BusStopPredictionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947372BDD6209000F374B /* BusStopPredictionsView.swift */; };
 		F43AC30B2BD751CE0093767E /* ctaTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AC30A2BD751CE0093767E /* ctaTrackerApp.swift */; };
 		F43AC30D2BD751CE0093767E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AC30C2BD751CE0093767E /* ContentView.swift */; };
 		F43AC30F2BD751CF0093767E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43AC30E2BD751CF0093767E /* Assets.xcassets */; };
@@ -18,10 +24,7 @@
 		F43AC3212BD751D00093767E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43AC3202BD751D00093767E /* Assets.xcassets */; };
 		F43AC3242BD751D00093767E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43AC3232BD751D00093767E /* Preview Assets.xcassets */; };
 		F4EFBC4C2BD7565700CD7035 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F4EFBC4B2BD7565700CD7035 /* Alamofire */; };
-		F4EFBC4E2BD7565700CD7035 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F4EFBC4D2BD7565700CD7035 /* AlamofireDynamic */; };
 		F4EFBC512BD7566300CD7035 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F4EFBC502BD7566300CD7035 /* Alamofire */; };
-		F4EFBC532BD7566600CD7035 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F4EFBC522BD7566600CD7035 /* AlamofireDynamic */; };
-		F4EFBC542BD7566600CD7035 /* AlamofireDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = F4EFBC522BD7566600CD7035 /* AlamofireDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F4EFBC5D2BD75CBA00CD7035 /* GetBusRoutesAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC5C2BD75CBA00CD7035 /* GetBusRoutesAPIResponse.swift */; };
 		F4EFBC602BD9E2E600CD7035 /* BusRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC5F2BD9E2E600CD7035 /* BusRoutes.swift */; };
 		F4EFBC652BD9E80C00CD7035 /* BusRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC642BD9E80C00CD7035 /* BusRoutesView.swift */; };
@@ -29,7 +32,6 @@
 		F4EFBC6A2BD9EAC200CD7035 /* BusRouteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC692BD9EAC200CD7035 /* BusRouteDetailView.swift */; };
 		F4EFBC6C2BD9ECDE00CD7035 /* GetBusDirectionsAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC6B2BD9ECDE00CD7035 /* GetBusDirectionsAPIResponse.swift */; };
 		F4EFBC6E2BD9ED1100CD7035 /* BusDirections.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC6D2BD9ED1100CD7035 /* BusDirections.swift */; };
-		F4EFBC702BD9F43500CD7035 /* FavoritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC6F2BD9F43400CD7035 /* FavoritesRepository.swift */; };
 		F4EFBC742BD9F4E800CD7035 /* Favorites.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4EFBC722BD9F4E800CD7035 /* Favorites.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +63,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F4EFBC542BD7566600CD7035 /* AlamofireDynamic in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,6 +71,12 @@
 
 /* Begin PBXFileReference section */
 		F41947292BDD451B000F374B /* BusRouteEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusRouteEntity.swift; sourceTree = "<group>"; };
+		F419472C2BDD54B4000F374B /* GetBusRouteStopsAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBusRouteStopsAPIResponse.swift; sourceTree = "<group>"; };
+		F419472E2BDD5547000F374B /* BusRouteStops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteStops.swift; sourceTree = "<group>"; };
+		F41947312BDD59DD000F374B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		F41947332BDD5F83000F374B /* GetBusStopPredictionsAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBusStopPredictionsAPIResponse.swift; sourceTree = "<group>"; };
+		F41947352BDD5FBC000F374B /* BusStopPredictions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopPredictions.swift; sourceTree = "<group>"; };
+		F41947372BDD6209000F374B /* BusStopPredictionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopPredictionsView.swift; sourceTree = "<group>"; };
 		F43AC3072BD751CE0093767E /* ctaTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ctaTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F43AC30A2BD751CE0093767E /* ctaTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ctaTrackerApp.swift; sourceTree = "<group>"; };
 		F43AC30C2BD751CE0093767E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,7 +96,6 @@
 		F4EFBC692BD9EAC200CD7035 /* BusRouteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteDetailView.swift; sourceTree = "<group>"; };
 		F4EFBC6B2BD9ECDE00CD7035 /* GetBusDirectionsAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBusDirectionsAPIResponse.swift; sourceTree = "<group>"; };
 		F4EFBC6D2BD9ED1100CD7035 /* BusDirections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDirections.swift; sourceTree = "<group>"; };
-		F4EFBC6F2BD9F43400CD7035 /* FavoritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRepository.swift; sourceTree = "<group>"; };
 		F4EFBC732BD9F4E800CD7035 /* Favorites.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Favorites.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,7 +105,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4EFBC4C2BD7565700CD7035 /* Alamofire in Frameworks */,
-				F4EFBC4E2BD7565700CD7035 /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +113,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4EFBC512BD7566300CD7035 /* Alamofire in Frameworks */,
-				F4EFBC532BD7566600CD7035 /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +125,14 @@
 				F41947292BDD451B000F374B /* BusRouteEntity.swift */,
 			);
 			path = CoreDataEntities;
+			sourceTree = "<group>";
+		};
+		F41947302BDD59D5000F374B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F41947312BDD59DD000F374B /* Utils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		F43AC2FE2BD751CE0093767E = {
@@ -149,6 +161,7 @@
 				F4EFBC582BD75A7800CD7035 /* Info.plist */,
 				F43AC30A2BD751CE0093767E /* ctaTrackerApp.swift */,
 				F43AC30C2BD751CE0093767E /* ContentView.swift */,
+				F41947302BDD59D5000F374B /* Utils */,
 				F419472A2BDD451B000F374B /* CoreDataEntities */,
 				F4EFBC712BD9F4D400CD7035 /* CoreData */,
 				F4EFBC662BD9E82400CD7035 /* Repositories */,
@@ -199,6 +212,8 @@
 			children = (
 				F4EFBC5A2BD75CA600CD7035 /* API */,
 				F4EFBC5F2BD9E2E600CD7035 /* BusRoutes.swift */,
+				F419472E2BDD5547000F374B /* BusRouteStops.swift */,
+				F41947352BDD5FBC000F374B /* BusStopPredictions.swift */,
 				F4EFBC6D2BD9ED1100CD7035 /* BusDirections.swift */,
 			);
 			path = Models;
@@ -209,6 +224,8 @@
 			children = (
 				F4EFBC5C2BD75CBA00CD7035 /* GetBusRoutesAPIResponse.swift */,
 				F4EFBC6B2BD9ECDE00CD7035 /* GetBusDirectionsAPIResponse.swift */,
+				F419472C2BDD54B4000F374B /* GetBusRouteStopsAPIResponse.swift */,
+				F41947332BDD5F83000F374B /* GetBusStopPredictionsAPIResponse.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -218,6 +235,7 @@
 			children = (
 				F4EFBC642BD9E80C00CD7035 /* BusRoutesView.swift */,
 				F4EFBC692BD9EAC200CD7035 /* BusRouteDetailView.swift */,
+				F41947372BDD6209000F374B /* BusStopPredictionsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -226,7 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				F4EFBC672BD9E83400CD7035 /* BusRepository.swift */,
-				F4EFBC6F2BD9F43400CD7035 /* FavoritesRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -259,7 +276,6 @@
 			name = ctaTracker;
 			packageProductDependencies = (
 				F4EFBC4B2BD7565700CD7035 /* Alamofire */,
-				F4EFBC4D2BD7565700CD7035 /* AlamofireDynamic */,
 			);
 			productName = ctaTracker;
 			productReference = F43AC3072BD751CE0093767E /* ctaTracker.app */;
@@ -281,7 +297,6 @@
 			name = "ctaTracker Watch App";
 			packageProductDependencies = (
 				F4EFBC502BD7566300CD7035 /* Alamofire */,
-				F4EFBC522BD7566600CD7035 /* AlamofireDynamic */,
 			);
 			productName = "ctaTracker Watch App";
 			productReference = F43AC3172BD751CF0093767E /* ctaTracker Watch App.app */;
@@ -355,8 +370,12 @@
 			files = (
 				F4EFBC6C2BD9ECDE00CD7035 /* GetBusDirectionsAPIResponse.swift in Sources */,
 				F419472B2BDD451B000F374B /* BusRouteEntity.swift in Sources */,
+				F41947342BDD5F83000F374B /* GetBusStopPredictionsAPIResponse.swift in Sources */,
 				F43AC30D2BD751CE0093767E /* ContentView.swift in Sources */,
+				F41947322BDD59DD000F374B /* Utils.swift in Sources */,
 				F4EFBC652BD9E80C00CD7035 /* BusRoutesView.swift in Sources */,
+				F419472F2BDD5547000F374B /* BusRouteStops.swift in Sources */,
+				F41947362BDD5FBC000F374B /* BusStopPredictions.swift in Sources */,
 				F4EFBC6A2BD9EAC200CD7035 /* BusRouteDetailView.swift in Sources */,
 				F4EFBC682BD9E83400CD7035 /* BusRepository.swift in Sources */,
 				F4EFBC5D2BD75CBA00CD7035 /* GetBusRoutesAPIResponse.swift in Sources */,
@@ -364,7 +383,8 @@
 				F4EFBC6E2BD9ED1100CD7035 /* BusDirections.swift in Sources */,
 				F4EFBC742BD9F4E800CD7035 /* Favorites.xcdatamodeld in Sources */,
 				F43AC30B2BD751CE0093767E /* ctaTrackerApp.swift in Sources */,
-				F4EFBC702BD9F43500CD7035 /* FavoritesRepository.swift in Sources */,
+				F41947382BDD6209000F374B /* BusStopPredictionsView.swift in Sources */,
+				F419472D2BDD54B4000F374B /* GetBusRouteStopsAPIResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,7 +607,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -622,7 +642,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -687,20 +707,10 @@
 			package = F4EFBC4A2BD7565700CD7035 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		F4EFBC4D2BD7565700CD7035 /* AlamofireDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F4EFBC4A2BD7565700CD7035 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = AlamofireDynamic;
-		};
 		F4EFBC502BD7566300CD7035 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F4EFBC4A2BD7565700CD7035 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		F4EFBC522BD7566600CD7035 /* AlamofireDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F4EFBC4A2BD7565700CD7035 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = AlamofireDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
 
