@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct ctaTrackerApp: App {
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: BusRouteEntity.self)
     }
 }
