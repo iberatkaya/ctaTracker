@@ -10,13 +10,17 @@ import SwiftUI
 struct BusStopPredictionsView: View {
     let busRoute: BusRoute
     let stop: BusRouteStop
-    @StateObject var busPredictions: BusStopPredictions = BusStopPredictions(predictions: [])
-    //    @Query(sort: \BusRouteEntity.number) var favoriteBusRoutes: [BusRouteEntity]
-    @Environment(\.modelContext) var modelContext
-    @State var predictionsLoading = false
+    
+    @ObservedObject var viewModel: BusStopPredictionsViewModel
+    
+    init(busRoute: BusRoute, stop: BusRouteStop, viewModel: BusStopPredictionsViewModel? = nil) {
+        self.busRoute = busRoute
+        self.stop = stop
+        self.viewModel = viewModel ?? BusStopPredictionsViewModel(busRoute: busRoute, stop: stop)
+    }
     
     var body: some View {
-        ScrollView {
+        VStack {
             VStack {
                 Text(busRoute.number).font(.system(size: 32, weight: .semibold))
                 Text("Route: " + busRoute.name)
@@ -33,41 +37,54 @@ struct BusStopPredictionsView: View {
             
             Divider().padding(EdgeInsets(top: 4, leading: 0, bottom: 12, trailing: 0))
             
-            if (predictionsLoading) {
+            if (viewModel.predictionsLoading) {
                 ProgressView()
-            } else {
+            } else if (viewModel.noScheduledService) {
+                Text("No scheduled service. Please try another stop.")
+                    .font(.system(size: 14))
+                    .padding(.horizontal, 16)
+                    .multilineTextAlignment(.center)
+            }
+            else {
                 HStack{
                     VStack(spacing: 0) {
-                        ForEach(busPredictions.predictions) { prediction in
-                            HStack {
-                                Image(systemName: "circle.fill")
-                                    .font(.system(size: 6)).foregroundColor(Color.black)
-                                HStack(spacing: 0) {
-                                    Text(prediction.predictionMinutesLeft + " mins left - ")
-                                        .font(.system(size: 16, weight: .regular)).padding(0)
-                                    Text(prediction.finalDestination)
-                                        .font(.system(size: 16, weight: .regular)).padding(0)
-                                        .foregroundStyle(.gray)
-                                }.padding(.vertical, 2)
-                                Spacer()
+                        Section("Predictions") {
+                            ForEach(viewModel.busPredictions.predictions) { prediction in
+                                HStack {
+                                    Image(systemName: "circle.fill")
+                                        .font(.system(size: 6)).foregroundColor(Color.black)
+                                    HStack(spacing: 0) {
+                                        Text(prediction.predictionMinutesLeft + " mins left")
+                                            .font(.system(size: 16, weight: .regular)).padding(0)
+                                        Image(systemName: "arrow.forward")
+                                            .font(.system(size: 12)).foregroundColor(Color.black).padding(.leading, 12).padding(.trailing, 2)
+                                        Text(prediction.finalDestination)
+                                            .font(.system(size: 16, weight: .regular)).padding(0)
+                                            .foregroundStyle(.gray)
+                                    }.padding(.vertical, 2)
+                                    Spacer()
+                                }
                             }
-                        }
+                        }.headerProminence(.increased)
                     }
-                    Spacer()
                 }.padding(.horizontal, 16)
+                
             }
+            Spacer()
         }
-        .task {
-            guard !isPreviewBuilder() else { return }
-            predictionsLoading = true
-            let repo = BusRepository()
-            guard let res = await repo.getRouteStopPredictions(routeNumber: busRoute.number, stopID: stop.stopID) else { return }
-            busPredictions.predictions = BusStopPredictions.fromDataObject(data: res).predictions
-            predictionsLoading = false
-        }
+        .onAppear(perform: {
+            viewModel.busRoute = busRoute
+            viewModel.stop = stop
+            Task {
+                guard !isPreviewBuilder() else { return }
+                if (viewModel.didFetchData) { return }
+                await viewModel.fetchPredictions()
+            }
+        })
     }
 }
 
 #Preview {
-    BusStopPredictionsView(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), stop: BusRouteStop(stopID: "123", name: "Clark", lat: 15, lon: 14), busPredictions: BusStopPredictions(predictions: [BusStopPrediction(predictionTimestamp: "20240427", type: "A", stopName: "Michigan & Monroe", stopID: "18396", vehicleID: "4007", destinationFeetDistance: 3594, route: "151", routeDD: "151", routeDirection: "Southbound", finalDestination: "Union Station", prediction: "20240427 12:03", scheduledBlockID: "151 -510", scheduledTripID: "1007927", origtatripno: "254455166", delay: false, predictionMinutesLeft: "7", zone: "")]))
+    BusStopPredictionsView(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), stop: BusRouteStop(stopID: "123", name: "Clark", lat: 15, lon: 14), viewModel: BusStopPredictionsViewModel(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), stop: BusRouteStop(stopID: "123", name: "Clark", lat: 15, lon: 14), busPredictions: BusStopPredictions(predictions: [BusStopPrediction(predictionTimestamp: "20240427", type: "A", stopName: "Michigan & Monroe", stopID: "18396", vehicleID: "4007", destinationFeetDistance: 3594, route: "151", routeDD: "151", routeDirection: "Southbound", finalDestination: "Union Station", prediction: "20240427 12:03", scheduledBlockID: "151 -510", scheduledTripID: "1007927", origtatripno: "254455166", delay: false, predictionMinutesLeft: "7", zone: "")])))
+    
 }

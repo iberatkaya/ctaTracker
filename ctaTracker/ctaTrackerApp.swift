@@ -13,7 +13,17 @@ struct ctaTrackerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                ContentView()
+                    .tabItem {
+                        Label("Routes", systemImage: "bus.fill")
+                    }
+                
+                TransitMapView()
+                    .tabItem {
+                        Label("Map", systemImage: "map.fill")
+                    }
+            }
         }
         .modelContainer(for: BusRouteEntity.self)
     }

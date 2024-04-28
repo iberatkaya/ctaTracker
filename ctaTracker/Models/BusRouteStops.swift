@@ -19,7 +19,7 @@ class BusRouteStops: ObservableObject, Observable, Identifiable {
     }
 }
 
-class BusRouteStop: Identifiable {
+class BusRouteStop: ObservableObject, Identifiable {
     init(stopID: String, name: String, lat: Double, lon: Double) {
         self.stopID = stopID
         self.name = name
