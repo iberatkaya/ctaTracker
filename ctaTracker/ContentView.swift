@@ -10,18 +10,14 @@ import Alamofire
 
 struct ContentView: View {
     
-    @StateObject var busRoutes: BusRoutes = BusRoutes(routes: [])
+    @StateObject var viewModel = MainViewModel()
     
     var body: some View {
         NavigationStack {
             BusRoutesView()
-        }.onAppear(perform: {
-            Task {
-                let repo = BusRepository()
-                guard let response = await repo.getRoutes() else { return }
-                busRoutes.routes = BusRoutes.fromDataObject(data: response).routes
-            }
-        }).environment(busRoutes)
+        }.task {
+                await viewModel.fetchData()
+        }.environment(viewModel.busRoutes)
     }
 }
 

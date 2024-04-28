@@ -12,36 +12,31 @@ struct BusRoutesView: View {
     @EnvironmentObject var busRoutes: BusRoutes
     @Query(sort: \BusRouteEntity.number) var favoriteBusRoutes: [BusRouteEntity]
     @Environment(\.modelContext) var modelContext
+    @StateObject var viewModel = BusRoutesViewModel(routes: [])
     
     var body: some View {
         VStack {
             List {
-                ForEach(busRoutes.routes) { route in
-                    NavigationLink(destination: BusRouteDetailView(busRoute: route), label: {
-                        let isFaved = favoriteBusRoutes.map({ $0.number }).contains(route.number)
-                        HStack {
-                            if (isFaved) {
-                                Image(systemName: "star.fill")
-                                    .font(.system(size: 16, weight: .light)).foregroundColor(Color.yellow)
-                            }
-                            Text(route.number + " - " + route.name)
-                                .swipeActions {
-                                    if (isFaved) {
-                                        Button("Delete") {
-                                            removeItem(route)
-                                        }
-                                        .tint(.red)
-                                    } else {
-                                        Button("Save") {
-                                            saveItem(route)
-                                        }
-                                        .tint(.yellow)
-                                    }
-                                }
+                if (!favoriteBusRoutes.isEmpty){
+                    Section(header: Text("Favorites")) {
+                        ForEach(favoriteBusRoutes.map({ BusRoute.fromDataObject(data: $0) }), id: \.number) { route in
+                            NavigationLink(destination: BusRouteDetailView(busRoute: route), label: {
+                                BusRouteItemView(route: route, onSavePress: saveItem, onDeletePress: removeItem, isFaved: favoriteBusRoutes.map({ $0.number }).contains(route.number))
+                            })
                         }
-                    })
+                    }
                 }
-            }
+                
+                Section(header: Text("All Routes")) {
+                    ForEach(busRoutes.routes, id: \.number) { route in
+                        NavigationLink(destination: BusRouteDetailView(busRoute: route), label: {
+                            BusRouteItemView(route: route, onSavePress: saveItem, onDeletePress: removeItem, isFaved: favoriteBusRoutes.map({ $0.number }).contains(route.number))
+                        })
+                    }
+                }
+            }.onAppear(perform: {
+                viewModel.routes = busRoutes.routes
+            })
         }
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 
 struct GetBusStopPredictionsAPIResponse: Codable {
-    let bustimeResponse: BustimeAPIResponse
+    let bustimeResponse: BustimePredictionAPIResponse
 
     enum CodingKeys: String, CodingKey {
         case bustimeResponse = "bustime-response"
@@ -16,8 +16,10 @@ struct GetBusStopPredictionsAPIResponse: Codable {
 }
 
 // MARK: - BustimeResponse
-struct BustimeAPIResponse: Codable {
-    let prd: [PrdAPIResponse]
+struct BustimePredictionAPIResponse: Codable {
+    let prd: [PrdAPIResponse]?
+    
+//    let error: GetBusStopPredictionsErrorAPIResponse?
 }
 
 // MARK: - Prd
@@ -29,4 +31,19 @@ struct PrdAPIResponse: Codable {
     let prdtm, tablockid, tatripid, origtatripno: String
     let dly: Bool
     let prdctdn, zone: String
+}
+
+
+// MARK: - BustimeResponse
+//struct GetBusStopPredictionsErrorAPIResponse: Codable {
+//    let error: [GetBusStopPredictionsErrorsAPIResponse]?
+//}
+//
+//// MARK: - Error
+//struct GetBusStopPredictionsErrorsAPIResponse: Codable {
+//    let rt, stpid, msg: String
+//}
+//
+enum GetBusStopPredictionsAPIResponseError: Error {
+    case noScheduledService
 }

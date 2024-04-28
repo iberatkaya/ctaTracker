@@ -14,6 +14,12 @@
 		F41947342BDD5F83000F374B /* GetBusStopPredictionsAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947332BDD5F83000F374B /* GetBusStopPredictionsAPIResponse.swift */; };
 		F41947362BDD5FBC000F374B /* BusStopPredictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947352BDD5FBC000F374B /* BusStopPredictions.swift */; };
 		F41947382BDD6209000F374B /* BusStopPredictionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947372BDD6209000F374B /* BusStopPredictionsView.swift */; };
+		F419473A2BDE9AD0000F374B /* TransitMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947392BDE9AD0000F374B /* TransitMapView.swift */; };
+		F419473D2BDE9C8A000F374B /* BusRouteItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F419473C2BDE9C8A000F374B /* BusRouteItemView.swift */; };
+		F41947402BDEC920000F374B /* BusRoutesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F419473F2BDEC920000F374B /* BusRoutesViewModel.swift */; };
+		F41947422BDEC9A8000F374B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947412BDEC9A8000F374B /* MainViewModel.swift */; };
+		F41947442BDECEF7000F374B /* BusRouteDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947432BDECEF7000F374B /* BusRouteDetailsViewModel.swift */; };
+		F41947462BDED2F3000F374B /* BusStopPredictionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947452BDED2F3000F374B /* BusStopPredictionsViewModel.swift */; };
 		F43AC30B2BD751CE0093767E /* ctaTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AC30A2BD751CE0093767E /* ctaTrackerApp.swift */; };
 		F43AC30D2BD751CE0093767E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AC30C2BD751CE0093767E /* ContentView.swift */; };
 		F43AC30F2BD751CF0093767E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43AC30E2BD751CF0093767E /* Assets.xcassets */; };
@@ -77,6 +83,12 @@
 		F41947332BDD5F83000F374B /* GetBusStopPredictionsAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBusStopPredictionsAPIResponse.swift; sourceTree = "<group>"; };
 		F41947352BDD5FBC000F374B /* BusStopPredictions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopPredictions.swift; sourceTree = "<group>"; };
 		F41947372BDD6209000F374B /* BusStopPredictionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopPredictionsView.swift; sourceTree = "<group>"; };
+		F41947392BDE9AD0000F374B /* TransitMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitMapView.swift; sourceTree = "<group>"; };
+		F419473C2BDE9C8A000F374B /* BusRouteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteItemView.swift; sourceTree = "<group>"; };
+		F419473F2BDEC920000F374B /* BusRoutesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRoutesViewModel.swift; sourceTree = "<group>"; };
+		F41947412BDEC9A8000F374B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		F41947432BDECEF7000F374B /* BusRouteDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteDetailsViewModel.swift; sourceTree = "<group>"; };
+		F41947452BDED2F3000F374B /* BusStopPredictionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopPredictionsViewModel.swift; sourceTree = "<group>"; };
 		F43AC3072BD751CE0093767E /* ctaTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ctaTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F43AC30A2BD751CE0093767E /* ctaTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ctaTrackerApp.swift; sourceTree = "<group>"; };
 		F43AC30C2BD751CE0093767E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -135,6 +147,25 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		F419473B2BDE9C7A000F374B /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				F419473C2BDE9C8A000F374B /* BusRouteItemView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		F419473E2BDEC90C000F374B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F419473F2BDEC920000F374B /* BusRoutesViewModel.swift */,
+				F41947412BDEC9A8000F374B /* MainViewModel.swift */,
+				F41947432BDECEF7000F374B /* BusRouteDetailsViewModel.swift */,
+				F41947452BDED2F3000F374B /* BusStopPredictionsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		F43AC2FE2BD751CE0093767E = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +192,7 @@
 				F4EFBC582BD75A7800CD7035 /* Info.plist */,
 				F43AC30A2BD751CE0093767E /* ctaTrackerApp.swift */,
 				F43AC30C2BD751CE0093767E /* ContentView.swift */,
+				F419473E2BDEC90C000F374B /* ViewModels */,
 				F41947302BDD59D5000F374B /* Utils */,
 				F419472A2BDD451B000F374B /* CoreDataEntities */,
 				F4EFBC712BD9F4D400CD7035 /* CoreData */,
@@ -233,7 +265,9 @@
 		F4EFBC612BD9E7EF00CD7035 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F419473B2BDE9C7A000F374B /* SubViews */,
 				F4EFBC642BD9E80C00CD7035 /* BusRoutesView.swift */,
+				F41947392BDE9AD0000F374B /* TransitMapView.swift */,
 				F4EFBC692BD9EAC200CD7035 /* BusRouteDetailView.swift */,
 				F41947372BDD6209000F374B /* BusStopPredictionsView.swift */,
 			);
@@ -374,16 +408,22 @@
 				F43AC30D2BD751CE0093767E /* ContentView.swift in Sources */,
 				F41947322BDD59DD000F374B /* Utils.swift in Sources */,
 				F4EFBC652BD9E80C00CD7035 /* BusRoutesView.swift in Sources */,
+				F419473D2BDE9C8A000F374B /* BusRouteItemView.swift in Sources */,
 				F419472F2BDD5547000F374B /* BusRouteStops.swift in Sources */,
+				F41947442BDECEF7000F374B /* BusRouteDetailsViewModel.swift in Sources */,
+				F419473A2BDE9AD0000F374B /* TransitMapView.swift in Sources */,
 				F41947362BDD5FBC000F374B /* BusStopPredictions.swift in Sources */,
 				F4EFBC6A2BD9EAC200CD7035 /* BusRouteDetailView.swift in Sources */,
+				F41947402BDEC920000F374B /* BusRoutesViewModel.swift in Sources */,
 				F4EFBC682BD9E83400CD7035 /* BusRepository.swift in Sources */,
 				F4EFBC5D2BD75CBA00CD7035 /* GetBusRoutesAPIResponse.swift in Sources */,
+				F41947422BDEC9A8000F374B /* MainViewModel.swift in Sources */,
 				F4EFBC602BD9E2E600CD7035 /* BusRoutes.swift in Sources */,
 				F4EFBC6E2BD9ED1100CD7035 /* BusDirections.swift in Sources */,
 				F4EFBC742BD9F4E800CD7035 /* Favorites.xcdatamodeld in Sources */,
 				F43AC30B2BD751CE0093767E /* ctaTrackerApp.swift in Sources */,
 				F41947382BDD6209000F374B /* BusStopPredictionsView.swift in Sources */,
+				F41947462BDED2F3000F374B /* BusStopPredictionsViewModel.swift in Sources */,
 				F419472D2BDD54B4000F374B /* GetBusRouteStopsAPIResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,6 +647,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -642,6 +683,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

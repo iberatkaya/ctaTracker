@@ -10,11 +10,13 @@ import SwiftData
 
 struct BusRouteDetailView: View {
     let busRoute: BusRoute
-    @StateObject var busDirections: BusDirections = BusDirections(directions: [])
-    @StateObject var busRouteStops: BusRouteStops = BusRouteStops(stops: [])
-    @Query(sort: \BusRouteEntity.number) var favoriteBusRoutes: [BusRouteEntity]
-    @Environment(\.modelContext) var modelContext
-    @State var stopsLoading = false
+    @ObservedObject var viewModel: BusRouteDetailsViewModel
+    @State var directionIndex: Int = 0
+    
+    init(busRoute: BusRoute, viewModel: BusRouteDetailsViewModel? = nil) {
+        self.busRoute = busRoute
+        self.viewModel = viewModel ?? BusRouteDetailsViewModel(busRoute: busRoute)
+    }
 
     var body: some View {
         ScrollView {
@@ -31,22 +33,37 @@ struct BusRouteDetailView: View {
             )
             
             HStack(alignment: .center, spacing: 4) {
-                ForEach(Array(busDirections.directions.enumerated()), id: \.offset) { index, direction in
-                        Text(direction + (index != (busDirections.directions.count - 1) ? "," : ""))
-                            .padding(0)
-                            .font(.system(size: 13, weight: .regular))
-                }
             }
+            
+            NavigationLink(destination: TransitMapView(busRoute: busRoute, stops: viewModel.busRouteStops), label: { Text("Map") }).padding(.top, 12)
              
             Divider().padding(EdgeInsets(top: 4, leading: 0, bottom: 12, trailing: 0))
             
-            if (stopsLoading) {
+            VStack {
+                Picker("Direction", selection: $directionIndex) {
+                    ForEach(0..<viewModel.busDirections.directions.count, id: \.self) { index in
+                        Text(viewModel.busDirections.directions[index])
+                            .tag(index)
+                            .font(.system(size: 14))
+                    }
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding(.horizontal, 32)
+            .padding(.bottom, 12)
+            .onChange(of: directionIndex) {
+                Task {
+                    await self.viewModel.fetchStops(direction: self.viewModel.busDirections.directions[directionIndex])
+                }
+            }
+            
+            if (viewModel.stopsLoading) {
                 ProgressView()
             } else {
                 HStack{
                     VStack(spacing: 0) {
-                        ForEach(busRouteStops.stops) { stop in
-                            NavigationLink(destination: BusStopPredictionsView(busRoute: busRoute, stop: stop), label: {
+                        ForEach(viewModel.busRouteStops.stops) { stop in
+                            NavigationLink(destination: BusStopPredictionsView(busRoute: viewModel.busRoute, stop: stop), label: {
                                 HStack {
                                     Image(systemName: "circle.fill")
                                         .font(.system(size: 6)).foregroundColor(Color.black)
@@ -63,21 +80,15 @@ struct BusRouteDetailView: View {
             }
         }.task({
             guard !isPreviewBuilder() else { return }
-            let repo = BusRepository()
-            guard let res = await repo.getDirections() else { return }
-            busDirections.directions = BusDirections.fromDataObject(data: res).directions
+            if (viewModel.didFetchDirectionData) { return }
+            await viewModel.fetchDirections()
+            print(directionIndex)
+            if (viewModel.didFetchStopsData) { return }
+            await viewModel.fetchStops(direction: viewModel.busDirections.directions[self.directionIndex])
         })
-        .task {
-            guard !isPreviewBuilder() else { return }
-            stopsLoading = true
-            let repo = BusRepository()
-            guard let res = await repo.getRouteStops(routeNumber: busRoute.number) else { return }
-            busRouteStops.stops = BusRouteStops.fromDataObject(data: res).stops
-            stopsLoading = false
-        }
     }
 }
 
 #Preview {
-    BusRouteDetailView(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), busDirections: BusDirections(directions: ["Northbound", "Southbound"]), busRouteStops: BusRouteStops(stops: [BusRouteStop(stopID: "123", name: "Inner Lake Shore/Michigan Exp.", lat: 12.5, lon: 13.5), BusRouteStop(stopID: "456", name: "1500 DEF Ave", lat: 13.5, lon: 14.5)]))
+    BusRouteDetailView(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), viewModel: BusRouteDetailsViewModel(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), directions: BusDirections(directions: ["North", "South"])))
 }

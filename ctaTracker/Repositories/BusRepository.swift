@@ -11,8 +11,11 @@ import Alamofire
 class BusRepository {
     let key: String = Bundle.main.object(forInfoDictionaryKey: "BUS_KEY") as! String
     
+    static let repoInstace = BusRepository()
+    
     func getRoutes() async -> GetBusRoutesAPIResponse? {
         let url = "https://www.ctabustracker.com/bustime/api/v2/getroutes?key=" + key + "&format=json"
+        print(url)
         let res = try? await AF.request(url, method: .get).serializingDecodable(GetBusRoutesAPIResponse.self).result.get()
         
         return res
@@ -20,13 +23,15 @@ class BusRepository {
     
     func getDirections() async -> GetBusDirectionsAPIResponse? {
         let url = "https://www.ctabustracker.com/bustime/api/v2/getdirections?key=" + key + "&format=json&rt=146"
+        print(url)
         let res = try? await AF.request(url, method: .get).serializingDecodable(GetBusDirectionsAPIResponse.self).result.get()
         
         return res
     }
     
-    func getRouteStops(routeNumber: String) async -> GetBusRouteStopsAPIResponse? {
-        let url = "https://www.ctabustracker.com/bustime/api/v2/getstops?key=" + key + "&format=json&rt=" + routeNumber + "&dir=Southbound"
+    func getRouteStops(routeNumber: String, direction: String) async -> GetBusRouteStopsAPIResponse? {
+        let url = "https://www.ctabustracker.com/bustime/api/v2/getstops?key=" + key + "&format=json&rt=" + routeNumber + "&dir=" + direction
+        print(url)
         let res = try? await AF.request(url, method: .get).serializingDecodable(GetBusRouteStopsAPIResponse.self).result.get()
         
         return res
@@ -34,8 +39,14 @@ class BusRepository {
     
     func getRouteStopPredictions(routeNumber: String,stopID: String) async -> GetBusStopPredictionsAPIResponse? {
         let url = "https://www.ctabustracker.com/bustime/api/v2/getpredictions?key=" + key + "&format=json&rt=" + routeNumber + "&stpid=" + stopID
-        let res = try? await AF.request(url, method: .get).serializingDecodable(GetBusStopPredictionsAPIResponse.self).result.get()
+        let res = await AF.request(url, method: .get).serializingDecodable(GetBusStopPredictionsAPIResponse.self).result
         
-        return res
+        switch (res) {
+        case .success(let data):
+            return data
+        case .failure(let err):
+            print(err.localizedDescription)
+            return nil
+        }
     }
 }

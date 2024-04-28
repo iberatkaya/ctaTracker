@@ -14,8 +14,12 @@ class BusStopPredictions: ObservableObject, Observable, Identifiable {
     
     @Published var predictions: [BusStopPrediction]
     
-    static func fromDataObject(data: GetBusStopPredictionsAPIResponse) -> BusStopPredictions {
-        return BusStopPredictions(predictions: data.bustimeResponse.prd.map({ BusStopPrediction(predictionTimestamp: $0.tmstmp, type: $0.typ, stopName: $0.stpnm, stopID: $0.stpid, vehicleID: $0.vid, destinationFeetDistance: $0.dstp, route: $0.rt, routeDD: $0.rtdd, routeDirection: $0.rtdir, finalDestination: $0.des, prediction: $0.prdtm, scheduledBlockID: $0.tablockid, scheduledTripID: $0.tatripid, origtatripno: $0.origtatripno, delay: $0.dly, predictionMinutesLeft: $0.prdctdn, zone: $0.zone) }))
+    static func fromDataObject(data: GetBusStopPredictionsAPIResponse) throws -> BusStopPredictions {
+        if let predictions = data.bustimeResponse.prd {
+            return BusStopPredictions(predictions: predictions.map({ BusStopPrediction(predictionTimestamp: $0.tmstmp, type: $0.typ, stopName: $0.stpnm, stopID: $0.stpid, vehicleID: $0.vid, destinationFeetDistance: $0.dstp, route: $0.rt, routeDD: $0.rtdd, routeDirection: $0.rtdir, finalDestination: $0.des, prediction: $0.prdtm, scheduledBlockID: $0.tablockid, scheduledTripID: $0.tatripid, origtatripno: $0.origtatripno, delay: $0.dly, predictionMinutesLeft: $0.prdctdn, zone: $0.zone) }))
+        } else {
+            throw GetBusStopPredictionsAPIResponseError.noScheduledService
+        }
     }
 }
 
