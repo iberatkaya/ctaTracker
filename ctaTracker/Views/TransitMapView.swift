@@ -28,11 +28,26 @@ struct TransitMapView: View {
         Map(initialPosition: position) {
             if let stops { 
                 ForEach(Array(stops.stops.enumerated()), id: \.offset) { index, item in
-                    Marker(item.name, coordinate: CLLocationCoordinate2D(latitude: item.lat, longitude: item.lon))
-                        .tint(.blue)
-                    if (index < stops.stops.count - 1){
-                        MapPolyline(coordinates: [CLLocationCoordinate2D(latitude: item.lat, longitude: item.lon), CLLocationCoordinate2D(latitude: stops.stops[index + 1].lat, longitude: stops.stops[index + 1].lon)])
-                            .stroke(.blue, lineWidth: 2)
+                    Annotation(item.name, coordinate: CLLocationCoordinate2D(latitude: item.lat, longitude: item.lon)) {
+                        if let busRoute {
+                            NavigationLink(destination: { BusStopPredictionsView(busRoute: busRoute, stop: item) }){
+                                ZStack {
+                                    Circle()
+                                        .foregroundStyle(.blue.opacity(0.15))
+                                        .frame(width: 32, height: 32)
+                                    
+                                    Image(systemName: "mappin").foregroundColor(Color(red: 20/255, green: 20/255, blue: 150/255)).font(.system(size: 14))
+                                }
+                            }
+                        } else {
+                            ZStack {
+                                Circle()
+                                    .foregroundStyle(.blue.opacity(0.15))
+                                    .frame(width: 32, height: 32)
+                                
+                                Image(systemName: "mappin").foregroundColor(Color(red: 20/255, green: 20/255, blue: 150/255)).font(.system(size: 14))
+                            }
+                        }
                     }
                 }
             }
@@ -41,5 +56,5 @@ struct TransitMapView: View {
 }
 
 #Preview {
-    TransitMapView()
+    TransitMapView(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), stops: BusRouteStops(stops: [BusRouteStop(stopID: "123", name: "My Stop", lat: 41.88, lon: -87.627)]))
 }
