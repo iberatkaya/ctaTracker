@@ -44,14 +44,12 @@ struct BusRoutesView: View {
         let entity = item.toDataModel()
         modelContext.insert(entity)
         try? modelContext.save()
-        print("Save item")
     }
     
     func removeItem(_ item: BusRoute) {
         let entity = favoriteBusRoutes.first(where: { $0.number == item.number })
         if let entity {
             modelContext.delete(entity)
-            print("Delete item")
         }
     }
 }
