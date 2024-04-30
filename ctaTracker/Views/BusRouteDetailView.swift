@@ -73,7 +73,6 @@ struct BusRouteDetailView: View {
                 Spacer()
             } else {
                 if (mapViewEnabledIndex == 0) {
-                    let _ = print("in detail view", viewModel.busRouteStops.stops)
                     VStack{
                         ZStack {
                             TransitMapView(busRoute: viewModel.busRoute, stops: viewModel.busRouteStops)
