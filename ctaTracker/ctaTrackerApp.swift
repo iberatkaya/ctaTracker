@@ -19,7 +19,7 @@ struct ctaTrackerApp: App {
                         Label("Routes", systemImage: "bus.fill")
                     }
                 
-                TransitMapView()
+                TransitMapView(busRoute: BusRoute(number: "-1", name: "-1", color: "-1"), stops: BusRouteStops(stops: []))
                     .tabItem {
                         Label("Map", systemImage: "map.fill")
                     }

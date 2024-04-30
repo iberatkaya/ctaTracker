@@ -9,13 +9,13 @@ import SwiftUI
 import MapKit
 
 struct TransitMapView: View {
-    init(busRoute: BusRoute? = nil, stops: BusRouteStops? = nil) {
+    init(busRoute: BusRoute, stops: BusRouteStops) {
         self.busRoute = busRoute
         self.stops = stops
     }
     
-    let busRoute: BusRoute?
-    let stops: BusRouteStops?
+    @ObservedObject var busRoute: BusRoute
+    @ObservedObject var stops: BusRouteStops
     
     @State private var position = MapCameraPosition.region(
         MKCoordinateRegion(
@@ -26,20 +26,10 @@ struct TransitMapView: View {
 
     var body: some View {
         Map(initialPosition: position) {
-            if let stops { 
+            if (busRoute.number != "-1") {
                 ForEach(Array(stops.stops.enumerated()), id: \.offset) { index, item in
                     Annotation(item.name, coordinate: CLLocationCoordinate2D(latitude: item.lat, longitude: item.lon)) {
-                        if let busRoute {
-                            NavigationLink(destination: { BusStopPredictionsView(busRoute: busRoute, stop: item) }){
-                                ZStack {
-                                    Circle()
-                                        .foregroundStyle(.blue.opacity(0.15))
-                                        .frame(width: 32, height: 32)
-                                    
-                                    Image(systemName: "mappin").foregroundColor(Color(red: 20/255, green: 20/255, blue: 150/255)).font(.system(size: 14))
-                                }
-                            }
-                        } else {
+                        NavigationLink(destination: { BusStopPredictionsView(busRoute: busRoute, stop: item) }){
                             ZStack {
                                 Circle()
                                     .foregroundStyle(.blue.opacity(0.15))
@@ -48,10 +38,15 @@ struct TransitMapView: View {
                                 Image(systemName: "mappin").foregroundColor(Color(red: 20/255, green: 20/255, blue: 150/255)).font(.system(size: 14))
                             }
                         }
-                    }
+                    }       
                 }
             }
-        }
+        }.mapStyle(
+            .standard(
+                elevation: .flat,
+                pointsOfInterest: .excludingAll,
+                showsTraffic: false
+            ))
     }
 }
 

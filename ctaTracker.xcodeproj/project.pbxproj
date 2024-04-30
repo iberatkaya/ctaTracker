@@ -267,8 +267,8 @@
 			children = (
 				F419473B2BDE9C7A000F374B /* SubViews */,
 				F4EFBC642BD9E80C00CD7035 /* BusRoutesView.swift */,
-				F41947392BDE9AD0000F374B /* TransitMapView.swift */,
 				F4EFBC692BD9EAC200CD7035 /* BusRouteDetailView.swift */,
+				F41947392BDE9AD0000F374B /* TransitMapView.swift */,
 				F41947372BDD6209000F374B /* BusStopPredictionsView.swift */,
 			);
 			path = Views;

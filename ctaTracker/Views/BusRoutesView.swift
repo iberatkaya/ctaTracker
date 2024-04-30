@@ -19,7 +19,14 @@ struct BusRoutesView: View {
             List {
                 if (!favoriteBusRoutes.isEmpty){
                     Section(header: Text("Favorites")) {
-                        ForEach(favoriteBusRoutes.map({ BusRoute.fromDataObject(data: $0) }), id: \.number) { route in
+                        ForEach(favoriteBusRoutes.sorted(by: { a, b in
+                            let aNumArr = parseNumbersFromString(a.number)
+                            let bNumArr = parseNumbersFromString(b.number)
+                            if let aNum = aNumArr.first, let bNum = bNumArr.first {
+                                return aNum < bNum
+                            }
+                            return true
+                        }).map({ BusRoute.fromDataObject(data: $0) }), id: \.number) { route in
                             NavigationLink(destination: BusRouteDetailView(busRoute: route), label: {
                                 BusRouteItemView(route: route, onSavePress: saveItem, onDeletePress: removeItem, isFaved: favoriteBusRoutes.map({ $0.number }).contains(route.number))
                             })
