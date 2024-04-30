@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct BusRouteDetailView: View {
-    let busRoute: BusRoute
+    @State var busRoute: BusRoute
     @ObservedObject var viewModel: BusRouteDetailsViewModel
     @State var directionIndex: Int = 0
     @State var mapViewEnabledIndex = 0
@@ -68,8 +68,9 @@ struct BusRouteDetailView: View {
             .padding(.horizontal, 32)
             .padding(.bottom, 12)
             
-            if (viewModel.stopsLoading) {
+            if (viewModel.stopsLoading && mapViewEnabledIndex != 0) {
                 ProgressView()
+                Spacer()
             } else {
                 if (mapViewEnabledIndex == 0) {
                     VStack{
@@ -88,7 +89,6 @@ struct BusRouteDetailView: View {
                                 })
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                                 .offset(x: -12, y: -8)
-                                
                         }
                     }
                 } else {
