@@ -33,17 +33,6 @@ struct PrdAPIResponse: Codable {
     let prdctdn, zone: String
 }
 
-
-// MARK: - BustimeResponse
-//struct GetBusStopPredictionsErrorAPIResponse: Codable {
-//    let error: [GetBusStopPredictionsErrorsAPIResponse]?
-//}
-//
-//// MARK: - Error
-//struct GetBusStopPredictionsErrorsAPIResponse: Codable {
-//    let rt, stpid, msg: String
-//}
-//
 enum GetBusStopPredictionsAPIResponseError: Error {
     case noScheduledService
 }

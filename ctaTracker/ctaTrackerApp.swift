@@ -14,14 +14,13 @@ struct ctaTrackerApp: App {
     var body: some Scene {
         WindowGroup {
             TabView {
-                ContentView()
+                MainTrainView()
                     .tabItem {
-                        Label("Routes", systemImage: "bus.fill")
+                        Label("Train", systemImage: "train.side.front.car")
                     }
-                
-                TransitMapView(busRoute: BusRoute(number: "-1", name: "-1", color: "-1"), stops: BusRouteStops(stops: []))
+                MainBusView()
                     .tabItem {
-                        Label("Map", systemImage: "map.fill")
+                        Label("Bus", systemImage: "bus.fill")
                     }
             }
         }

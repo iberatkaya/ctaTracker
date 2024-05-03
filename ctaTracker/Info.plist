@@ -4,5 +4,7 @@
 <dict>
 	<key>BUS_KEY</key>
 	<string>$(BUS_KEY)</string>
+	<key>TRAIN_KEY</key>
+	<string>$(TRAIN_KEY)</string>
 </dict>
 </plist>

@@ -20,6 +20,4 @@ import SwiftData
     var color: String
     var name: String
     var number: String
-    
-    
 }

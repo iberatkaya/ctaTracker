@@ -8,19 +8,19 @@
 import SwiftUI
 import Alamofire
 
-struct ContentView: View {
+struct MainBusView: View {
     
-    @StateObject var viewModel = MainViewModel()
+    @StateObject var viewModel = MainBusViewModel()
     
     var body: some View {
         NavigationStack {
             BusRoutesView()
         }.task {
-                await viewModel.fetchData()
+            await viewModel.fetchData()
         }.environment(viewModel.busRoutes)
     }
 }
 
 #Preview {
-    ContentView().environment(BusRoutes(routes: [BusRoute(number: "151", name: "Sheridan", color: "#ff00ff")]))
+    MainBusView().environment(BusRoutes(routes: [BusRoute(number: "151", name: "Sheridan", color: "#ff00ff")]))
 }
