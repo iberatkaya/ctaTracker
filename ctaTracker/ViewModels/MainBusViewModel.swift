@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @MainActor 
-class MainViewModel: ObservableObject {
+class MainBusViewModel: ObservableObject {
     
     @Published var busRoutes: BusRoutes = BusRoutes(routes: [])
     let repo = BusRepository()

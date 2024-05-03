@@ -9,9 +9,7 @@ import Foundation
 import Alamofire
 
 class BusRepository {
-    let key: String = Bundle.main.object(forInfoDictionaryKey: "BUS_KEY") as! String
-    
-    static let repoInstace = BusRepository()
+    private let key: String = Bundle.main.object(forInfoDictionaryKey: "BUS_KEY") as! String
     
     func getRoutes() async -> GetBusRoutesAPIResponse? {
         let url = "https://www.ctabustracker.com/bustime/api/v2/getroutes?key=" + key + "&format=json"
