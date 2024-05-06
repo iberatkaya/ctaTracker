@@ -14,13 +14,14 @@ struct TrainRoutesView: View {
             List {
                 Section(header: Text("All Train Lines")) {
                     ForEach(TrainLine.allCases, id: \.rawValue) { route in
-                        NavigationLink(destination: EmptyView(), label: {
+                        NavigationLink(destination: TrainDetailsView(train: route), label: {
                             TrainLineItemView(line: route)
                         })
                     }
                 }
             }
         }
+        .navigationBarTitle("CTA Tracker", displayMode: .inline)
     }
 }
 

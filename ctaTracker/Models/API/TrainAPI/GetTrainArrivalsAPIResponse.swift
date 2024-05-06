@@ -8,14 +8,14 @@
 import Foundation
 
 struct GetTrainArrivalsAPIResponse: Codable {
-    let ctatt: GetTrainArrivalsAPIResponseCtatt?
+    let ctatt: GetTrainArrivalsAPIResponseCtatt
 }
 
 // MARK: - Ctatt
 struct GetTrainArrivalsAPIResponseCtatt: Codable {
     let tmst, errCD: String?
     let errNm: String?
-    let eta: [GetTrainArrivalsAPIResponseEta]?
+    let eta: [GetTrainArrivalsAPIResponseEta]
 
     enum CodingKeys: String, CodingKey {
         case tmst
@@ -26,10 +26,10 @@ struct GetTrainArrivalsAPIResponseCtatt: Codable {
 
 // MARK: - Eta
 struct GetTrainArrivalsAPIResponseEta: Codable {
-    let staID, stpID, staNm, stpDe: String?
-    let rn, rt, destSt, destNm: String?
-    let trDR, prdt, arrT, isApp: String?
-    let isSch, isDly, isFlt: String?
+    let staID, stpID, staNm, stpDe: String
+    let rn, rt, destSt, destNm: String
+    let trDR, prdt, arrT, isApp: String
+    let isSch, isDly, isFlt: String
     //    let flags: nil
     let lat, lon, heading: String?
     

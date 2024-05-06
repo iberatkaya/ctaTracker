@@ -74,3 +74,24 @@ func mapTrainLineToKey(_ line: TrainLine) -> String {
     if (line == TrainLine.green) { return "green" }
     return "yellow"
 }
+
+func timestampDiffFromNowInMinutes(_ date: String) throws -> Int {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    dateFormatter.timeZone = TimeZone(abbreviation: "CDT")
+    if let myDate = dateFormatter.date(from: date) {
+        let diff = Date.now.distance(to: myDate)
+        return Int((diff / 60))
+    } else {
+        throw TimeStampDiffErrors.invalidBEValue
+    }
+}
+
+enum TimeStampDiffErrors: Error {
+    case invalidBEValue
+    case parseError
+}
+
+func getUniqueItemsFromArray(_ arr: [String]) -> [String] {
+    return Array(Set(arr))
+}
