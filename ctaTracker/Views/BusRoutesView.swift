@@ -45,6 +45,7 @@ struct BusRoutesView: View {
                 viewModel.routes = busRoutes.routes
             })
         }
+        .navigationBarTitle("Bus Tracker", displayMode: .inline)
     }
     
     func saveItem(_ item: BusRoute) {
