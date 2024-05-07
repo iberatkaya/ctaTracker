@@ -86,12 +86,17 @@ func mapTrainLineToRouteID(_ line: TrainLine) -> String {
     return "Y"
 }
 
-func timestampDiffFromNowInMinutes(_ date: String) throws -> Int {
+enum TransitType {
+    case bus
+    case train
+}
+
+func timestampDiffFromNowInMinutes(date: String, type: TransitType, curDate: Date? = nil) throws -> Int {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    dateFormatter.dateFormat = type == .train ? "yyyy-MM-dd'T'HH:mm:ss" : "yyyyMMdd HH:mm"
     dateFormatter.timeZone = TimeZone(abbreviation: "CDT")
     if let myDate = dateFormatter.date(from: date) {
-        let diff = Date.now.distance(to: myDate)
+        let diff = (curDate ?? Date.now).distance(to: myDate)
         return Int((diff / 60))
     } else {
         throw TimeStampDiffErrors.invalidBEValue

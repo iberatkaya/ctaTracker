@@ -19,6 +19,9 @@ struct BusStopPredictionsView: View {
         self.viewModel = viewModel ?? BusStopPredictionsViewModel(busRoute: busRoute, stop: stop)
     }
     
+    @State private var currentDate = Date.now
+    let timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         VStack {
             VStack {
@@ -50,12 +53,18 @@ struct BusStopPredictionsView: View {
                     VStack(spacing: 0) {
                         Section("Predictions") {
                             ForEach(viewModel.busPredictions.predictions) { prediction in
+                                
                                 HStack {
                                     Image(systemName: "circle.fill")
                                         .font(.system(size: 6)).foregroundColor(Color.black)
                                     HStack(spacing: 0) {
-                                        Text(prediction.predictionMinutesLeft + " mins left")
-                                            .font(.system(size: 16, weight: .regular)).padding(0)
+                                        if let pred = try? timestampDiffFromNowInMinutes(date: prediction.prediction, type: .bus, curDate: currentDate) {
+                                            Text(String(pred) + " mins left")
+                                                .font(.system(size: 16, weight: .regular)).padding(0)
+                                                .onReceive(timer) { input in
+                                                    currentDate = input
+                                                }
+                                        }
                                         Image(systemName: "arrow.forward")
                                             .font(.system(size: 12)).foregroundColor(Color.black).padding(.leading, 12).padding(.trailing, 2)
                                         Text(prediction.finalDestination)
