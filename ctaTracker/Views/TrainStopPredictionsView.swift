@@ -18,9 +18,12 @@ struct TrainStopPredictionsView: View {
     let train: TrainLine
     let trainStop: TrainStop
     @ObservedObject var viewModel: TrainStopPredictionsViewModel
-    
+    @EnvironmentObject var trainStops: TrainStops
+
     var body: some View {
         VStack(spacing: 0) {
+            Text(trainStop.stationName).padding(.bottom, 8).padding(.top, 4).font(.system(size: 19).bold())
+            Text(mapTrainLineToName(train) + " Line").font(.system(size: 15)).padding(.bottom, 12).foregroundStyle(.gray)
             List {
                 ForEach(getUniqueItemsFromArray(viewModel.trainPredictions.predictions.map({ $0.destinationName })), id: \.self) { dir in
                     Section(dir) {

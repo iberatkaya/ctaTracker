@@ -24,6 +24,6 @@ struct ctaTrackerApp: App {
                     }
             }
         }
-        .modelContainer(for: BusRouteEntity.self)
+        .modelContainer(for: [TrainStopEntity.self, BusRouteEntity.self])
     }
 }

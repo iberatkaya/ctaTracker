@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TrainDetailsView: View {
     internal init(train: TrainLine) {
@@ -14,17 +15,35 @@ struct TrainDetailsView: View {
     
     let train: TrainLine
     @EnvironmentObject var trainStops: TrainStops
+    @Query(sort: \TrainStopEntity.stationDescription) var favoriteTrainStops: [TrainStopEntity]
+    @Environment(\.modelContext) var modelContext
     
     var body: some View {
         List {
             Section(header: Text(mapTrainLineToName(train) + " Line Stops")) {
                 ForEach(Array(lineStopsOrdering[mapTrainLineToKey(train)]!.enumerated()), id: \.offset) { index, stopID in
                     let stop = trainStops.stops.first { $0.mapID == stopID }
-                    NavigationLink(destination: TrainStopPredictionsView(train: train, trainStop: stop!), label: {
-                        Text(stop?.stationDescription ?? "")
-                    })
+                    if let stop {
+                        NavigationLink(destination: TrainStopPredictionsView(train: train, trainStop: stop), label: {
+                            TrainStopItemView(train: train, stop: stop, isFaved: favoriteTrainStops.map({ Int($0.mapID) }).contains(stop.mapID), onSavePress: saveItem, onDeletePress: removeItem)
+                        })
+                    }
+                    EmptyView()
                 }
             }
+        }
+    }
+    
+    func saveItem(_ item: TrainStop) {
+        let entity = item.toDataModel(selectedLine: train)
+        modelContext.insert(entity)
+        try? modelContext.save()
+    }
+    
+    func removeItem(_ item: TrainStop) {
+        let entity = favoriteTrainStops.first(where: { $0.mapID == item.mapID })
+        if let entity {
+            modelContext.delete(entity)
         }
     }
 }

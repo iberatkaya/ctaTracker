@@ -75,6 +75,17 @@ func mapTrainLineToKey(_ line: TrainLine) -> String {
     return "yellow"
 }
 
+func mapTrainLineToRouteID(_ line: TrainLine) -> String {
+    if (line == TrainLine.red) { return "Red" }
+    if (line == TrainLine.blue) { return "Blue" }
+    if (line == TrainLine.orange) { return "Org" }
+    if (line == TrainLine.pink) { return "Pink" }
+    if (line == TrainLine.purple || line == TrainLine.purpleExpress) { return "P" }
+    if (line == TrainLine.brown) { return "Brn" }
+    if (line == TrainLine.green) { return "G" }
+    return "Y"
+}
+
 func timestampDiffFromNowInMinutes(_ date: String) throws -> Int {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
