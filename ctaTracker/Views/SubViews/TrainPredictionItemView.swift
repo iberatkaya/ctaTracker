@@ -14,14 +14,20 @@ struct TrainPredictionItemView: View {
     
     var prediction: TrainStopPrediction
     
+    @State var currentDate = Date.now
+    let timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         HStack {
             Image(systemName: "circle.fill")
                 .font(.system(size: 6)).foregroundColor(Color.black)
             HStack(spacing: 0) {
-                if let pred = try? timestampDiffFromNowInMinutes(prediction.arrivalTime) {
+                if let pred = try? timestampDiffFromNowInMinutes(date: prediction.arrivalTime, type: .train, curDate: currentDate) {
                     Text(pred > 0 ? (String(pred)
                          + " minutes left") : "Arriving now").padding(0).font(.system(size: 16, weight: .regular))
+                        .onReceive(timer) { input in
+                            currentDate = input
+                        }
                 } else {
                     Text("Time couldn't be found")
                 }
