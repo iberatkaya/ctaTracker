@@ -20,8 +20,8 @@ struct TrainPredictionItemView: View {
                 .font(.system(size: 6)).foregroundColor(Color.black)
             HStack(spacing: 0) {
                 if let pred = try? timestampDiffFromNowInMinutes(prediction.arrivalTime) {
-                    Text(String(pred)
-                         + " minutes left").padding(0).font(.system(size: 16, weight: .regular))
+                    Text(pred > 0 ? (String(pred)
+                         + " minutes left") : "Arriving now").padding(0).font(.system(size: 16, weight: .regular))
                 } else {
                     Text("Time couldn't be found")
                 }

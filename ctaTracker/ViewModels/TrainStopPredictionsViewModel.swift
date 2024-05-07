@@ -24,9 +24,9 @@ class TrainStopPredictionsViewModel: ObservableObject {
     @Published var predictionsLoading = false
     let repo = TrainRepository()
     
-    func fetchPredictions() async {
+    func fetchPredictions(getAllStops: Bool = false) async {
         predictionsLoading = true
-        guard let data = try? await repo.getArrivals(mapID: String(trainStop.mapID)) else {
+        guard let data = try? await repo.getArrivals(mapID: String(trainStop.mapID), line: getAllStops ? nil : trainLine) else {
             predictionsLoading = false
             return
         }

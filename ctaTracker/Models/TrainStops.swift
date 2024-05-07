@@ -59,6 +59,18 @@ struct TrainStop {
         if (data.O) { line.append(TrainLine.orange) }
         return line
     }
+    
+    func toDataModel(selectedLine: TrainLine) -> TrainStopEntity {
+        let entity = TrainStopEntity(mapID: Int64(mapID), stationDescription: stationDescription, stationName: stationName, trainLine: selectedLine.rawValue)
+        return entity
+    }
+    
+    static func fromDataObject(data: TrainStopEntity, allTrainStopData: [TrainStop]) throws -> TrainStop {
+        if let item = allTrainStopData.first(where: { $0.mapID == data.mapID }) {
+            return item
+        }
+        throw TrainStopEntityError.missingData
+    }
 }
 
 struct TrainStopJSONData: Decodable {
@@ -79,4 +91,8 @@ struct TrainStopJSONData: Decodable {
     let Pnk: Bool
     let O: Bool
     let Location: String
+}
+
+enum TrainStopEntityError: Error {
+    case missingData
 }
