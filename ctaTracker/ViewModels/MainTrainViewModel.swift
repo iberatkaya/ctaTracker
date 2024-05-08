@@ -16,7 +16,7 @@ class MainTrainViewModel: ObservableObject {
     
     func loadJSON() async {
         let jsonData = try? getJSONFile("stations")
-        trainStops.stops = jsonData?.map({ TrainStop.fromJSON($0) }) ?? []
+        trainStops = TrainStops(stops: jsonData?.map({ TrainStop.fromJSON($0) }) ?? [])
     }
 }
 

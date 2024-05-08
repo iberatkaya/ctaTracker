@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct TransitMapView: View {
+struct BusTransitMapView: View {
     init(busRoute: BusRoute, stops: BusRouteStops) {
         self.busRoute = busRoute
         self.stops = stops
@@ -51,5 +51,5 @@ struct TransitMapView: View {
 }
 
 #Preview {
-    TransitMapView(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), stops: BusRouteStops(stops: [BusRouteStop(stopID: "123", name: "My Stop", lat: 41.88, lon: -87.627)]))
+    BusTransitMapView(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), stops: BusRouteStops(stops: [BusRouteStop(stopID: "123", name: "My Stop", lat: 41.88, lon: -87.627)]))
 }

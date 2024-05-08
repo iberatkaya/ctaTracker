@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import SwiftUI
 
 
 func isPreviewBuilder() -> Bool {
@@ -84,6 +85,17 @@ func mapTrainLineToRouteID(_ line: TrainLine) -> String {
     if (line == TrainLine.brown) { return "Brn" }
     if (line == TrainLine.green) { return "G" }
     return "Y"
+}
+
+func mapTrainLineToColor(_ line: TrainLine) -> Color {
+    if (line == TrainLine.red) { return .red }
+    if (line == TrainLine.blue) { return .blue }
+    if (line == TrainLine.orange) { return .orange }
+    if (line == TrainLine.pink) { return .pink }
+    if (line == TrainLine.purple || line == TrainLine.purpleExpress) { return .purple }
+    if (line == TrainLine.brown) { return .brown }
+    if (line == TrainLine.green) { return .green }
+    return .yellow
 }
 
 enum TransitType {

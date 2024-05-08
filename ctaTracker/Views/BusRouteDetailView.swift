@@ -10,14 +10,14 @@ import SwiftData
 
 struct BusRouteDetailView: View {
     @State var busRoute: BusRoute
-    @ObservedObject var viewModel: BusRouteDetailsViewModel
+    @StateObject var viewModel: BusRouteDetailsViewModel
     @State var directionIndex: Int = 0
     @State var mapViewEnabledIndex = 0
     @State var displayOptions = ["Map", "List"]
-    
+
     init(busRoute: BusRoute, viewModel: BusRouteDetailsViewModel? = nil) {
         self.busRoute = busRoute
-        self.viewModel = viewModel ?? BusRouteDetailsViewModel(busRoute: busRoute)
+        self._viewModel = StateObject(wrappedValue:viewModel ?? BusRouteDetailsViewModel(busRoute: busRoute))
     }
 
     var body: some View {
@@ -38,24 +38,6 @@ struct BusRouteDetailView: View {
             Divider().padding(EdgeInsets(top: 4, leading: 0, bottom: 12, trailing: 0))
             
             VStack {
-                Picker("Direction", selection: $directionIndex) {
-                    ForEach(0..<viewModel.busDirections.directions.count, id: \.self) { index in
-                        Text(viewModel.busDirections.directions[index])
-                            .tag(index)
-                            .font(.system(size: 14))
-                    }
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding(.horizontal, 32)
-            .padding(.bottom, 12)
-            .onChange(of: directionIndex) {
-                Task {
-                    await self.viewModel.fetchStops(direction: self.viewModel.busDirections.directions[directionIndex])
-                }
-            }
-            
-            VStack {
                 Picker("Direction", selection: $mapViewEnabledIndex) {
                     ForEach(0..<displayOptions.count, id: \.self) { index in
                         Text(displayOptions[index])
@@ -65,8 +47,26 @@ struct BusRouteDetailView: View {
                 }
             }
             .pickerStyle(.segmented)
-            .padding(.horizontal, 32)
+            .frame(width: 200)
             .padding(.bottom, 12)
+            
+            VStack {
+                Picker("Direction", selection: $directionIndex) {
+                    ForEach(0..<viewModel.busDirections.directions.count, id: \.self) { index in
+                        Text(viewModel.busDirections.directions[index])
+                            .tag(index)
+                            .font(.system(size: 14))
+                    }
+                }
+            }
+            .pickerStyle(.segmented)
+            .frame(width: 200)
+            .padding(.bottom, 12)
+            .onChange(of: directionIndex) {
+                Task {
+                    await self.viewModel.fetchStops(direction: self.viewModel.busDirections.directions[directionIndex])
+                }
+            }
             
             if (viewModel.stopsLoading && mapViewEnabledIndex != 0) {
                 ProgressView()
@@ -75,9 +75,9 @@ struct BusRouteDetailView: View {
                 if (mapViewEnabledIndex == 0) {
                     VStack{
                         ZStack {
-                            TransitMapView(busRoute: viewModel.busRoute, stops: viewModel.busRouteStops)
+                            BusTransitMapView(busRoute: viewModel.busRoute, stops: viewModel.busRouteStops)
                             
-                            NavigationLink(destination: TransitMapView(busRoute: busRoute, stops: viewModel.busRouteStops), label: {
+                            NavigationLink(destination: BusTransitMapView(busRoute: busRoute, stops: viewModel.busRouteStops), label: {
                                 
                                 Text("Full Screen")
                                     .padding(.horizontal, 12)

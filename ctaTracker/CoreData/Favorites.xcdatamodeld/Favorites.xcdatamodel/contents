@@ -9,6 +9,7 @@
         <attribute name="mapID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="stationDescription" optional="YES" attributeType="String"/>
         <attribute name="stationName" optional="YES" attributeType="String"/>
+        <attribute name="stopID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="trainLine" optional="YES" attributeType="String"/>
     </entity>
 </model>

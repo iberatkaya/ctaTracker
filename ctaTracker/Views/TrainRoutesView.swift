@@ -9,9 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct TrainRoutesView: View {
-    @Query(sort: \TrainStopEntity.stationDescription) var favoriteTrainStops: [TrainStopEntity]
     @Environment(\.modelContext) var modelContext
     @EnvironmentObject var trainStops: TrainStops
+    @Query(sort: \TrainStopEntity.stationDescription) var favoriteTrainStops: [TrainStopEntity]
     
     var body: some View {
         VStack {
