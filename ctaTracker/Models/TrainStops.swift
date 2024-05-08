@@ -8,8 +8,7 @@
 import Foundation
 import CoreLocation
 
-@Observable
-class TrainStops: ObservableObject {
+class TrainStops: ObservableObject, Observable, Identifiable {
     init(stops: [TrainStop] = []) {
         self.stops = stops
     }
@@ -21,7 +20,7 @@ class TrainStops: ObservableObject {
     }
 }
 
-struct TrainStop {
+class TrainStop: ObservableObject, Identifiable {
     init(stopID: Int, directionID: String, stopName: String, stationName: String, stationDescription: String, mapID: Int, lines: [TrainLine], location: CLLocationCoordinate2D) {
         self.stopID = stopID
         self.directionID = directionID
@@ -61,7 +60,7 @@ struct TrainStop {
     }
     
     func toDataModel(selectedLine: TrainLine) -> TrainStopEntity {
-        let entity = TrainStopEntity(mapID: Int64(mapID), stationDescription: stationDescription, stationName: stationName, trainLine: selectedLine.rawValue)
+        let entity = TrainStopEntity(mapID: Int64(mapID), stationDescription: stationDescription, stationName: stationName, trainLine: selectedLine.rawValue, stopID: Int64(stopID))
         return entity
     }
     
