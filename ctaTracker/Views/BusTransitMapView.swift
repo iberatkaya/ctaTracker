@@ -12,17 +12,18 @@ struct BusTransitMapView: View {
     init(busRoute: BusRoute, stops: BusRouteStops) {
         self.busRoute = busRoute
         self.stops = stops
+        _position = State(wrappedValue: MapCameraPosition.region(
+            MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: stops.stops.first?.lat ?? 41.8781, longitude: stops.stops.first?.lon ?? -87.6298),
+                span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
+            )
+        ))
     }
     
     @ObservedObject var busRoute: BusRoute
     @ObservedObject var stops: BusRouteStops
     
-    @State private var position = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 41.8781, longitude: -87.6298),
-            span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
-        )
-    )
+    @State var position: MapCameraPosition
 
     var body: some View {
         Map(initialPosition: position) {
