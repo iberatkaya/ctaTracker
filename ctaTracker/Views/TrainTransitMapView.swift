@@ -13,6 +13,12 @@ struct TrainTransitMapView: View {
         self.train = train
         self.stops = stops
         self.onSavePress = onSavePress
+        _position = State(wrappedValue: MapCameraPosition.region(
+            MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: !stops.stops.isEmpty ? stops.stops[(stops.stops.count - 1) / 2].location.latitude : 41.8781, longitude: !stops.stops.isEmpty ? stops.stops[(stops.stops.count - 1) / 2].location.longitude : -87.6298),
+                span: MKCoordinateSpan(latitudeDelta: 0.15, longitudeDelta: 0.15)
+            )
+        ))
     }
     
     var train: TrainLine
@@ -20,12 +26,7 @@ struct TrainTransitMapView: View {
     let onSavePress: ((_ stop: TrainStop) -> Void)?
     @State private var triggerNavOnClick = false
 
-    @State private var position = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 41.8781, longitude: -87.6298),
-            span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
-        )
-    )
+    @State private var position: MapCameraPosition
 
     var body: some View {
         Map(initialPosition: position) {

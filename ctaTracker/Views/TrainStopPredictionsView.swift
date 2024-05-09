@@ -25,10 +25,14 @@ struct TrainStopPredictionsView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            VStack {
-                Text(trainStop.stationName).padding(.bottom, 8).padding(.top, 4).font(.system(size: 19).bold())
-                Text(mapTrainLineToName(train) + " Line").font(.system(size: 15)).padding(.bottom, 12).foregroundStyle(.gray)
+            HStack(spacing: 0) {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(trainStop.stationName).padding(.bottom, 4).padding(.top, 4).font(.system(size: 19).bold())
+                    Text(mapTrainLineToName(train) + " Line").font(.system(size: 15)).padding(.bottom, 12).foregroundStyle(.gray)
+                }
+                Spacer()
             }
+            .padding(.leading, 24)
             .padding(.bottom, -18)
             HStack {
                 Spacer()

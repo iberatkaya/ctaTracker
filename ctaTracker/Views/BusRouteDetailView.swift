@@ -21,58 +21,65 @@ struct BusRouteDetailView: View {
     }
 
     var body: some View {
-        VStack {
-            VStack {
-                Text(busRoute.number).font(.system(size: 32, weight: .semibold))
-                Text(busRoute.name)
-                    .font(.system(size: 15, weight: .semibold))
-            }
-            .padding(.horizontal, 32)
-            .padding(.vertical, 12)
-            .overlay(
-                RoundedRectangle(cornerRadius: 32)
-                    .stroke(.black, lineWidth: 2)
-            )
-            
-             
-            Divider().padding(EdgeInsets(top: 4, leading: 0, bottom: 12, trailing: 0))
-            
-            VStack {
-                Picker("Direction", selection: $mapViewEnabledIndex) {
-                    ForEach(0..<displayOptions.count, id: \.self) { index in
-                        Text(displayOptions[index])
-                            .tag(index)
-                            .font(.system(size: 14))
-                    }
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(busRoute.name).font(.system(size: 15, weight: .semibold))
+                        .scaledToFit()
+                        .minimumScaleFactor(0.8)
+                    Text(busRoute.number)
+                        .font(.system(size: 13))
                 }
-            }
-            .pickerStyle(.segmented)
-            .frame(width: 200)
-            .padding(.bottom, 12)
-            
-            VStack {
+                Spacer()
+                
                 Picker("Direction", selection: $directionIndex) {
                     ForEach(0..<viewModel.busDirections.directions.count, id: \.self) { index in
                         Text(viewModel.busDirections.directions[index])
                             .tag(index)
-                            .font(.system(size: 14))
+                            .font(.system(size: 16))
+                            .scaledToFit()
+                            .minimumScaleFactor(0.5)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .frame(width: 160)
+                .padding(.bottom, 8)
+                .padding(.leading, 16)
+                .onChange(of: directionIndex) {
+                    Task {
+                        await self.viewModel.fetchStops(direction: self.viewModel.busDirections.directions[directionIndex])
                     }
                 }
             }
-            .pickerStyle(.segmented)
-            .frame(width: 200)
-            .padding(.bottom, 12)
-            .onChange(of: directionIndex) {
-                Task {
-                    await self.viewModel.fetchStops(direction: self.viewModel.busDirections.directions[directionIndex])
-                }
-            }
+            .padding(.horizontal, 24)
+            .padding(.bottom, 8)
+            
+             
+            Divider()
             
             if (viewModel.stopsLoading && mapViewEnabledIndex != 0) {
                 ProgressView()
                 Spacer()
             } else {
-                if (mapViewEnabledIndex == 0) {
+                VStack {
+                    Picker("Type", selection: $mapViewEnabledIndex) {
+                        ForEach(0..<displayOptions.count, id: \.self) { index in
+                            if (index == 0) {
+                                Image(systemName: "map.circle")
+                                    .tag(0)
+                            } else {
+                                Image(systemName: "list.bullet.circle")
+                                    .tag(1)
+                            }
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .padding(.horizontal, 2)
+                    .padding(.bottom, 4)
+                    .padding(.top, 4)
+                }.background(.gray.opacity(0.12))
+                
+                TabView(selection: $mapViewEnabledIndex) {
                     VStack{
                         ZStack {
                             BusTransitMapView(busRoute: viewModel.busRoute, stops: viewModel.busRouteStops)
@@ -86,12 +93,12 @@ struct BusRouteDetailView: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 12))
                                     .font(.system(size: 15, weight: .semibold))
                                     .foregroundColor(.blue)
-                                })
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                                .offset(x: -12, y: -8)
+                            })
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                            .offset(x: -12, y: -8)
                         }
-                    }
-                } else {
+                    }.tag(0)
+                    
                     VStack(spacing: 0) {
                         List {
                             ForEach(viewModel.busRouteStops.stops) { stop in
@@ -108,9 +115,8 @@ struct BusRouteDetailView: View {
                                 })
                             }
                         }
-                        .listStyle(PlainListStyle())
-                    }
-                }
+                    }.tag(1)
+                }.tabViewStyle(.page(indexDisplayMode: .never))
             }
         }.task({
             guard !isPreviewBuilder() else { return }
@@ -124,7 +130,7 @@ struct BusRouteDetailView: View {
 }
 
 #Preview {
-    var viewModel = BusRouteDetailsViewModel(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), directions: BusDirections(directions: ["North", "South"]))
-    viewModel.busRouteStops = BusRouteStops(stops: [BusRouteStop(stopID: "123", name: "Clark", lat: 15, lon: 14), BusRouteStop(stopID: "456", name: "Division", lat: 15.1, lon: 14.1),])
-    return BusRouteDetailView(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), viewModel: viewModel)
+    var viewModel = BusRouteDetailsViewModel(busRoute: BusRoute(number: "151", name: "Jackson Park Express", color: "#f0f"), directions: BusDirections(directions: ["Northbound", "Southbound"]))
+    viewModel.busRouteStops = BusRouteStops(stops: [BusRouteStop(stopID: "123", name: "Clark", lat: 15, lon: 14), BusRouteStop(stopID: "456", name: "Division", lat: 41.8781, lon: -87.6298),])
+    return BusRouteDetailView(busRoute: BusRoute(number: "151", name: "Jackson Park Express", color: "#f0f"), viewModel: viewModel)
 }

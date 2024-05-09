@@ -18,8 +18,8 @@ class BusRepository {
         return res
     }
     
-    func getDirections() async -> GetBusDirectionsAPIResponse? {
-        let url = "https://www.ctabustracker.com/bustime/api/v2/getdirections?key=" + key + "&format=json&rt=146"
+    func getDirections(route: String) async -> GetBusDirectionsAPIResponse? {
+        let url = "https://www.ctabustracker.com/bustime/api/v2/getdirections?key=" + key + "&format=json&rt=" + route
         let res = try? await AF.request(url, method: .get).serializingDecodable(GetBusDirectionsAPIResponse.self).result.get()
         
         return res
@@ -38,7 +38,7 @@ class BusRepository {
         switch (res) {
         case .success(let data):
             return data
-        case .failure(let err):
+        case .failure(_):
             return nil
         }
     }

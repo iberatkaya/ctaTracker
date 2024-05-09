@@ -27,7 +27,7 @@ class BusRouteDetailsViewModel: ObservableObject {
     let repo = BusRepository()
     
     func fetchDirections() async {
-        guard let res = await repo.getDirections() else { return }
+        guard let res = await repo.getDirections(route: busRoute.number) else { return }
         busDirections.directions = BusDirections.fromDataObject(data: res).directions
         didFetchDirectionData = true
     }

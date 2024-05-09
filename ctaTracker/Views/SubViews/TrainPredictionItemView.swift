@@ -32,7 +32,7 @@ struct TrainPredictionItemView: View {
                     Text("Time couldn't be found")
                 }
                 Image(systemName: "arrow.forward")
-                    .font(.system(size: 12)).foregroundColor(Color.black).padding(.leading, 12).padding(.trailing, 2)
+                    .font(.system(size: 13)).foregroundColor(Color.black).padding(.leading, 12).padding(.trailing, 4)
                 Text(prediction.destinationName)
                     .font(.system(size: 16, weight: .regular)).padding(0)
                     .foregroundStyle(.gray)

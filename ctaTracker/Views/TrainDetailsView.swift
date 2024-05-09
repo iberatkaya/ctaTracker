@@ -36,11 +36,12 @@ struct TrainDetailsView: View {
             .padding(.bottom, 4)
             .padding(.top, 8)
             
-            if (mapViewEnabledIndex == 0) {
+            
+            TabView(selection: $mapViewEnabledIndex) {
                 TrainTransitMapView(train: train, stops:TrainStops(stops:   Array(lineStopsOrdering[mapTrainLineToKey(train)]!.enumerated()).map({ index, stopID in
                     return trainStops.stops.first { $0.mapID == stopID }!
-                })))
-            } else {
+                }))).tag(0)
+                
                 List {
                     Section(header: Text(mapTrainLineToName(train) + " Line Stops")) {
                         ForEach(Array(lineStopsOrdering[mapTrainLineToKey(train)]!.enumerated()), id: \.offset) { index, stopID in
@@ -54,8 +55,8 @@ struct TrainDetailsView: View {
                             EmptyView()
                         }
                     }
-                }
-            }
+                }.tag(1)
+            }.tabViewStyle(.page(indexDisplayMode: .never))
         }
     }
     
