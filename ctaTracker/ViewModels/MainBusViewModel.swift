@@ -12,10 +12,4 @@ import SwiftUI
 class MainBusViewModel: ObservableObject {
     
     @Published var busRoutes: BusRoutes = BusRoutes(routes: [])
-    let repo = BusRepository()
-    
-    func fetchData() async {
-        guard let response = await repo.getRoutes() else { return }
-        busRoutes.routes = BusRoutes.fromDataObject(data: response).routes
-    }
 }

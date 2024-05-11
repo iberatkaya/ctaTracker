@@ -7,27 +7,32 @@
 
 import SwiftUI
 import MapKit
+import ActivityIndicatorView
 
 struct BusTransitMapView: View {
     init(busRoute: BusRoute, stops: BusRouteStops) {
         self.busRoute = busRoute
         self.stops = stops
-        _position = State(wrappedValue: MapCameraPosition.region(
-            MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: stops.stops.first?.lat ?? 41.8781, longitude: stops.stops.first?.lon ?? -87.6298),
-                span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
-            )
-        ))
     }
     
     @ObservedObject var busRoute: BusRoute
     @ObservedObject var stops: BusRouteStops
     
-    @State var position: MapCameraPosition
+    @State var showLocation = true
+
+    @EnvironmentObject var locationManager: LocationManager
+    
+    @State var position: MapCameraPosition = MapCameraPosition.region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 41.8781, longitude: -87.6298),
+            span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
+        )
+    )
+    @State var updateLocation = false
 
     var body: some View {
-        Map(initialPosition: position) {
-            if (busRoute.number != "-1") {
+        ZStack {
+            MapView(position: $position, content: busRoute.number != "-1" ? {
                 ForEach(Array(stops.stops.enumerated()), id: \.offset) { index, item in
                     Annotation(item.name, coordinate: CLLocationCoordinate2D(latitude: item.lat, longitude: item.lon)) {
                         NavigationLink(destination: { BusStopPredictionsView(busRoute: busRoute, stop: item) }){
@@ -39,15 +44,10 @@ struct BusTransitMapView: View {
                                 Image(systemName: "mappin").foregroundColor(Color(red: 20/255, green: 20/255, blue: 150/255)).font(.system(size: 14))
                             }
                         }
-                    }       
+                    }
                 }
-            }
-        }.mapStyle(
-            .standard(
-                elevation: .flat,
-                pointsOfInterest: .excludingAll,
-                showsTraffic: false
-            ))
+            } : { nil })
+        }
     }
 }
 

@@ -91,7 +91,7 @@ func mapTrainLineToColor(_ line: TrainLine) -> Color {
     if (line == TrainLine.red) { return .red }
     if (line == TrainLine.blue) { return .blue }
     if (line == TrainLine.orange) { return .orange }
-    if (line == TrainLine.pink) { return .pink }
+    if (line == TrainLine.pink) { return Color(red: 255/255, green: 105/255, blue: 180/255) }
     if (line == TrainLine.purple || line == TrainLine.purpleExpress) { return .purple }
     if (line == TrainLine.brown) { return .brown }
     if (line == TrainLine.green) { return .green }

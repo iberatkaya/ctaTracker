@@ -23,13 +23,11 @@ struct BusRouteDetailView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(busRoute.name).font(.system(size: 15, weight: .semibold))
-                        .scaledToFit()
-                        .minimumScaleFactor(0.8)
-                    Text(busRoute.number)
-                        .font(.system(size: 13))
+                HStack(spacing: 0) {
+                    Text(busRoute.number).bold()
+                    Text(" - " + busRoute.name)
                 }
+                
                 Spacer()
                 
                 Picker("Direction", selection: $directionIndex) {
@@ -74,29 +72,13 @@ struct BusRouteDetailView: View {
                         }
                     }
                     .pickerStyle(.segmented)
-                    .padding(.horizontal, 2)
-                    .padding(.bottom, 4)
-                    .padding(.top, 4)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 4)
                 }.background(.gray.opacity(0.12))
                 
                 TabView(selection: $mapViewEnabledIndex) {
                     VStack{
-                        ZStack {
-                            BusTransitMapView(busRoute: viewModel.busRoute, stops: viewModel.busRouteStops)
-                            
-                            NavigationLink(destination: BusTransitMapView(busRoute: busRoute, stops: viewModel.busRouteStops), label: {
-                                
-                                Text("Full Screen")
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 4)
-                                    .background(.gray.opacity(0.25))
-                                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                                    .font(.system(size: 15, weight: .semibold))
-                                    .foregroundColor(.blue)
-                            })
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                            .offset(x: -12, y: -8)
-                        }
+                        BusTransitMapView(busRoute: viewModel.busRoute, stops: viewModel.busRouteStops)
                     }.tag(0)
                     
                     VStack(spacing: 0) {
@@ -112,9 +94,9 @@ struct BusRouteDetailView: View {
                                             .padding(.vertical, 2)
                                         Spacer()
                                     }
-                                })
+                                }).padding(.vertical, 4)
                             }
-                        }
+                        }.padding(.top, -12)
                     }.tag(1)
                 }.tabViewStyle(.page(indexDisplayMode: .never))
             }
