@@ -11,8 +11,18 @@ import SwiftUI
 @MainActor 
 class BusRoutesViewModel: ObservableObject {
     init(routes: [BusRoute]) {
-        self.routes = routes
+        self.busRoutes = BusRoutes(routes: routes)
     }
     
-    @Published var routes: [BusRoute]
+    @Published var isLoading = true
+    @Published var busRoutes: BusRoutes
+    let repo = BusRepository()
+    
+    func fetchData() async -> [BusRoute]? {
+        guard let response = await repo.getRoutes() else { return nil }
+        let routes = BusRoutes.fromDataObject(data: response).routes
+        busRoutes.routes = routes
+        isLoading = false
+        return routes
+    }
 }

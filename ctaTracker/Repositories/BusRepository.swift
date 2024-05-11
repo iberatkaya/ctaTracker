@@ -13,6 +13,7 @@ class BusRepository {
     
     func getRoutes() async -> GetBusRoutesAPIResponse? {
         let url = "https://www.ctabustracker.com/bustime/api/v2/getroutes?key=" + key + "&format=json"
+//        try? await Task.sleep(nanoseconds: UInt64(3 * Double(NSEC_PER_SEC)))
         let res = try? await AF.request(url, method: .get).serializingDecodable(GetBusRoutesAPIResponse.self).result.get()
         
         return res

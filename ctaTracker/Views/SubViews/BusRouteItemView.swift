@@ -15,35 +15,40 @@ struct BusRouteItemView: View {
         self.onDeletePress = onDeletePress
     }
     
-    let isFaved: Bool
+    var isFaved: Bool
     let route: BusRoute
     let onSavePress: (_ route: BusRoute) -> Void
     let onDeletePress: (_ route: BusRoute) -> Void
     
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             if (isFaved) {
                 Image(systemName: "star.fill")
                     .font(.system(size: 16, weight: .light)).foregroundColor(Color.yellow)
+                    .padding(.trailing, 8)
             }
-            Text(route.number + " - " + route.name)
-                .swipeActions {
-                    if (isFaved) {
-                        Button("Delete") {
-                            onDeletePress(route)
-                        }
-                        .tint(.red)
-                    } else {
-                        Button("Save") {
-                            onSavePress(route)
-                        }
-                        .tint(.yellow)
-                    }
+            Text(route.number).bold()
+            Text(" - " + route.name)
+                
+        }.padding(.vertical, 4)
+        .swipeActions {
+            if (isFaved) {
+                Button("Delete") {
+                    onDeletePress(route)
                 }
+                .tint(.red)
+            } else {
+                Button("Save") {
+                    onSavePress(route)
+                }
+                .tint(.yellow)
+            }
         }
     }
 }
 
 #Preview {
-    BusRouteItemView(route: BusRoute(number: "151", name: "Sheridan", color: "#f0f"))
+    var view = BusRouteItemView(route: BusRoute(number: "151", name: "Sheridan", color: "#f0f"))
+    view.isFaved = true
+    return view
 }

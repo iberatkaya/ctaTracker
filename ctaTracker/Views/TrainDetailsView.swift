@@ -22,19 +22,30 @@ struct TrainDetailsView: View {
 
     var body: some View {
         VStack {
-            VStack {
-                Picker("Direction", selection: $mapViewEnabledIndex) {
-                    ForEach(0..<displayOptions.count, id: \.self) { index in
-                        Text(displayOptions[index])
-                            .tag(index)
-                            .font(.system(size: 14))
-                    }
+            HStack {
+                VStack(alignment: .center, spacing: 0) {
+                    Text("\(mapTrainLineToName(train)) Line").font(.system(size: 20, weight: .semibold))
+                        .scaledToFit()
+                        .minimumScaleFactor(0.8)
+                        .foregroundColor(mapTrainLineToColor(train))
                 }
-            }
-            .pickerStyle(.segmented)
-            .frame(width: 200)
-            .padding(.bottom, 4)
-            .padding(.top, 8)
+                
+                Spacer()
+                
+                VStack {
+                    Picker("Direction", selection: $mapViewEnabledIndex) {
+                        ForEach(0..<displayOptions.count, id: \.self) { index in
+                            Text(displayOptions[index])
+                                .tag(index)
+                                .font(.system(size: 14))
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+                .frame(width: 200)
+                .padding(.bottom, 4)
+                .padding(.top, 8)
+            }.padding(.horizontal, 24)
             
             
             TabView(selection: $mapViewEnabledIndex) {

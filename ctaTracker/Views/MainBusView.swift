@@ -15,8 +15,6 @@ struct MainBusView: View {
     var body: some View {
         NavigationStack {
             BusRoutesView()
-        }.task {
-            await viewModel.fetchData()
         }.environment(viewModel.busRoutes)
     }
 }

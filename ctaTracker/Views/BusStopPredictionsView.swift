@@ -23,22 +23,19 @@ struct BusStopPredictionsView: View {
     let timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
-            VStack {
-                Text(busRoute.number).font(.system(size: 32, weight: .semibold))
-                Text("Route: " + busRoute.name)
-                    .font(.system(size: 15, weight: .semibold))
-                Text("Stop: " + stop.name)
-                    .font(.system(size: 13))
-            }
-            .padding(.horizontal, 32)
-            .padding(.vertical, 12)
-            .overlay(
-                RoundedRectangle(cornerRadius: 32)
-                    .stroke(.black, lineWidth: 2)
-            )
-            
-            Divider().padding(EdgeInsets(top: 4, leading: 0, bottom: 12, trailing: 0))
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack(spacing: 0) {
+                        Text(busRoute.number).bold()
+                        Text(" - " + busRoute.name)
+                    }.padding(.bottom, 4)
+                    Text(stop.name)
+                        .font(.system(size: 15))
+                }
+                Spacer()
+            }.padding(.horizontal, 24)
+                .padding(.bottom, 12)
             
             if (viewModel.predictionsLoading) {
                 ProgressView()
@@ -51,33 +48,36 @@ struct BusStopPredictionsView: View {
             else {
                 HStack{
                     VStack(spacing: 0) {
-                        Section("Predictions") {
-                            ForEach(viewModel.busPredictions.predictions) { prediction in
-                                
-                                HStack {
-                                    Image(systemName: "circle.fill")
-                                        .font(.system(size: 6)).foregroundColor(Color.black)
-                                    HStack(spacing: 0) {
-                                        if let pred = try? timestampDiffFromNowInMinutes(date: prediction.prediction, type: .bus, curDate: currentDate) {
-                                            Text(String(pred) + " mins left")
+                        List {
+                            Section {
+                                ForEach(viewModel.busPredictions.predictions) { prediction in
+                                    HStack {
+                                        Image(systemName: "circle.fill")
+                                            .font(.system(size: 6)).foregroundColor(Color.black)
+                                        HStack(spacing: 0) {
+                                            if let pred = try? timestampDiffFromNowInMinutes(date: prediction.prediction, type: .bus, curDate: currentDate) {
+                                                Text(String(pred) + " mins left")
+                                                    .font(.system(size: 16, weight: .regular)).padding(0)
+                                                    .onReceive(timer) { input in
+                                                        currentDate = input
+                                                    }
+                                            }
+                                            Image(systemName: "arrow.forward")
+                                                .font(.system(size: 13)).foregroundColor(Color.black).padding(.leading, 12).padding(.trailing, 4)
+                                            Text(prediction.finalDestination)
                                                 .font(.system(size: 16, weight: .regular)).padding(0)
-                                                .onReceive(timer) { input in
-                                                    currentDate = input
-                                                }
-                                        }
-                                        Image(systemName: "arrow.forward")
-                                            .font(.system(size: 13)).foregroundColor(Color.black).padding(.leading, 12).padding(.trailing, 4)
-                                        Text(prediction.finalDestination)
-                                            .font(.system(size: 16, weight: .regular)).padding(0)
-                                            .foregroundStyle(.gray)
-                                    }.padding(.vertical, 2)
-                                    Spacer()
+                                                .foregroundStyle(.gray)
+                                        }.padding(.vertical, 2)
+                                        Spacer()
+                                    }
                                 }
+                            } header: {
+                                Text("Predictions").font(.system(size: 16, weight: .semibold))
+                                    .padding(.bottom, 4)
                             }
-                        }.headerProminence(.increased)
+                        }
                     }
-                }.padding(.horizontal, 16)
-                
+                }
             }
             Spacer()
         }
