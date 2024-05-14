@@ -17,6 +17,7 @@ struct BusTransitMapView: View {
     
     @ObservedObject var busRoute: BusRoute
     @ObservedObject var stops: BusRouteStops
+    @EnvironmentObject var locationManager: LocationManager
     
     @State var position: MapCameraPosition = MapCameraPosition.region(
         MKCoordinateRegion(
@@ -28,6 +29,11 @@ struct BusTransitMapView: View {
     var body: some View {
         MapViewContainer(position: $position, content: busRoute.number != "-1" ? {
             Map(position: $position, interactionModes: [.pan, .zoom]) {
+                if let location = locationManager.location {
+                    Annotation("", coordinate: location) {
+                        LocationIndicator()
+                    }
+                }
                 ForEach(Array(stops.stops.enumerated()), id: \.offset) { index, item in
                     Annotation(item.name, coordinate: CLLocationCoordinate2D(latitude: item.lat, longitude: item.lon)) {
                         NavigationLink(destination: { BusStopPredictionsView(busRoute: busRoute, stop: item) }){

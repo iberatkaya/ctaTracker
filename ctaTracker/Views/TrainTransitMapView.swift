@@ -27,11 +27,17 @@ struct TrainTransitMapView: View {
     let onSavePress: ((_ stop: TrainStop) -> Void)?
 
     @State private var position: MapCameraPosition
+    @EnvironmentObject var locationManager: LocationManager
         
     var body: some View {
         ZStack {
             MapViewContainer(position: $position, content: {
                 Map(position: $position, interactionModes: [.pan, .zoom]) {
+                    if let location = locationManager.location {
+                        Annotation("", coordinate: location) {
+                            LocationIndicator()
+                        }
+                    }
                     ForEach(Array(stops.stops.enumerated()), id: \.offset) { index, item in
                         TrainStopAnnotation(trains: [train], stop: item)
                         if (index + 1 < stops.stops.count) {
