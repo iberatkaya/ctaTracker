@@ -19,6 +19,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     override init() {
         super.init()
         manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyKilometer
     }
 
     func requestLocation() {
@@ -26,6 +27,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             manager.requestLocation()
         } else {
             manager.requestWhenInUseAuthorization()
+            manager.startUpdatingLocation()
         }
     }
 

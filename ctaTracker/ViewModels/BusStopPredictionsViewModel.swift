@@ -28,19 +28,21 @@ class BusStopPredictionsViewModel: ObservableObject {
     let repo = BusRepository()
     
     func fetchPredictions() async {
-            didFetchData = true
-            predictionsLoading = true
-            noScheduledService = false
-            do {
-                if let res = await repo.getRouteStopPredictions(routeNumber: busRoute.number, stopID: stop.stopID)  {
-                    busPredictions.predictions = try BusStopPredictions.fromDataObject(data: res).predictions
-                } else {
-                    noScheduledService = true
-                }
-            } catch {
+        didFetchData = true
+        predictionsLoading = true
+        noScheduledService = false
+        do {
+            if let res = await repo.getRouteStopPredictions(routeNumber: busRoute.number, stopID: stop.stopID)  {
+                busPredictions.predictions = try BusStopPredictions.fromDataObject(data: res).predictions
+            } else {
                 noScheduledService = true
             }
+        } catch {
+            noScheduledService = true
+        }
+        withAnimation(.easeOut(duration: TimeInterval(0.25))) {
             predictionsLoading = false
+        }
     }
 }
 

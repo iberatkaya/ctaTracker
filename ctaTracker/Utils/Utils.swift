@@ -123,3 +123,36 @@ enum TimeStampDiffErrors: Error {
 func getUniqueItemsFromArray(_ arr: [String]) -> [String] {
     return Array(Set(arr))
 }
+
+func getSortedStopsByLine(train: TrainLine, allStops: [TrainStop]) -> [TrainStop?] {
+    if allStops.isEmpty { return [] }
+    return Array(lineStopsOrdering[mapTrainLineToKey(train)]!.enumerated()).map({ index, stopID in
+        return allStops.first { $0.mapID == stopID }
+    })
+}
+
+func getAllStopsMarkers(_ allStops: [TrainStop]) -> [TrainStop] {
+    var mapIDs: [Int] = []
+    var groupedStops: [TrainStop] = []
+    for stop in allStops {
+        var existingStop: TrainStop? = nil
+        for i in mapIDs {
+            if (i == stop.mapID) {
+                existingStop = groupedStops.first(where: { $0.mapID == i })
+                break;
+            }
+        }
+        
+        if let existingStop {
+            if let index = groupedStops.firstIndex(where: { $0.mapID == existingStop.mapID }) {
+                let newStop = TrainStop(stopID: existingStop.stopID, directionID: existingStop.directionID, stopName: existingStop.stopName, stationName: existingStop.stationName, stationDescription: existingStop.stationDescription, mapID: existingStop.mapID, lines: Array(Set([stop.lines, existingStop.lines].flatMap({ $0 }))), location: existingStop.location)
+                groupedStops[index] = newStop
+            }
+        } else {
+            mapIDs.append(stop.mapID)
+            
+            groupedStops.append(stop)
+        }
+    }
+    return groupedStops
+}

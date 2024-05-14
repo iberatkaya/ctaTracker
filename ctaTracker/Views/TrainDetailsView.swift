@@ -49,7 +49,7 @@ struct TrainDetailsView: View {
             
             
             TabView(selection: $mapViewEnabledIndex) {
-                TrainTransitMapView(train: train, stops:TrainStops(stops:   Array(lineStopsOrdering[mapTrainLineToKey(train)]!.enumerated()).map({ index, stopID in
+                TrainTransitMapView(train: train, stops: TrainStops(stops:   Array(lineStopsOrdering[mapTrainLineToKey(train)]!.enumerated()).map({ index, stopID in
                     return trainStops.stops.first { $0.mapID == stopID }!
                 }))).tag(0)
                 

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import CoreLocation
 
 @main
 struct ctaTrackerApp: App {
@@ -20,11 +21,16 @@ struct ctaTrackerApp: App {
     }
     
     @StateObject var locationManager = LocationManager()
+    @StateObject var viewModel = MainViewModel()
     
     var body: some Scene {
         WindowGroup {
             TabView {
                 Group {
+                    MainMapView()
+                        .tabItem {
+                            Label("Map", systemImage: "map")
+                        }
                     MainTrainView()
                         .tabItem {
                             Label("Train", systemImage: "train.side.front.car")
@@ -36,9 +42,12 @@ struct ctaTrackerApp: App {
                 }
                 .toolbarBackground(Color(red: 242/255, green: 242/255, blue: 242/255), for: .tabBar)
                 .toolbarBackground(.visible, for: .tabBar)
+            }.task {
+                await viewModel.loadJSON()
             }
         }
         .modelContainer(for: [TrainStopEntity.self, BusRouteEntity.self])
         .environmentObject(locationManager)
+        .environmentObject(viewModel.trainStops)
     }
 }

@@ -22,7 +22,10 @@ class BusRoutesViewModel: ObservableObject {
         guard let response = await repo.getRoutes() else { return nil }
         let routes = BusRoutes.fromDataObject(data: response).routes
         busRoutes.routes = routes
-        isLoading = false
+        
+        withAnimation(.easeOut(duration: TimeInterval(0.25))) {
+            isLoading = false
+        }
         return routes
     }
 }

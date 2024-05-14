@@ -1,5 +1,5 @@
 //
-//  MainTrainViewModel.swift
+//  MainViewModel.swift
 //  ctaTracker
 //
 //  Created by Ibrahim Berat Kaya on 4/30/24.
@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @MainActor
-class MainTrainViewModel: ObservableObject {
+class MainViewModel: ObservableObject {
     
     @Published var trainStops = TrainStops(stops: [])
     let repo = TrainRepository()
