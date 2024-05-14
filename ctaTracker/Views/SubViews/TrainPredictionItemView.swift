@@ -24,7 +24,7 @@ struct TrainPredictionItemView: View {
             HStack(spacing: 0) {
                 if let pred = try? timestampDiffFromNowInMinutes(date: prediction.arrivalTime, type: .train, curDate: currentDate) {
                     Text(pred > 0 ? (String(pred)
-                         + " minutes left") : "Arriving now").padding(0).font(.system(size: 16, weight: .regular))
+                         + " minutes left") : "Arriving soon").padding(0).font(.system(size: 16, weight: .regular))
                         .onReceive(timer) { input in
                             currentDate = input
                         }

@@ -25,35 +25,21 @@ struct TrainTransitMapView: View {
     var train: TrainLine
     @ObservedObject var stops: TrainStops
     let onSavePress: ((_ stop: TrainStop) -> Void)?
-    @State private var triggerNavOnClick = false
-    @State var showLocation = true
 
     @State private var position: MapCameraPosition
-    @EnvironmentObject var locationManager: LocationManager
-    
-    @State var updateLocation = false
-    
+        
     var body: some View {
         ZStack {
-            MapView(position: $position, content: {
-                ForEach(Array(stops.stops.enumerated()), id: \.offset) { index, item in
-                    Annotation(item.stationName, coordinate: item.location) {
-                        NavigationLink(destination: { TrainStopPredictionsView(train: train, trainStop: item) }){
-                            ZStack {
-                                Circle()
-                                    .foregroundStyle(mapTrainLineToColor(train).opacity(0.15))
-                                    .frame(width: 28, height: 28)
-                                
-                                Image(systemName: "mappin").foregroundColor(mapTrainLineToColor(train)).font(.system(size: 16)).brightness(-0.2)
-                            }
+            MapViewContainer(position: $position, content: {
+                Map(position: $position, interactionModes: [.pan, .zoom]) {
+                    ForEach(Array(stops.stops.enumerated()), id: \.offset) { index, item in
+                        TrainStopAnnotation(trains: [train], stop: item)
+                        if (index + 1 < stops.stops.count) {
+                            MapPolyline(coordinates: [item.location, stops.stops[index + 1].location], contourStyle: .geodesic)
+                                .stroke(mapTrainLineToColor(train).opacity(0.55), lineWidth: 2.0)
                         }
                     }
-                    if (index + 1 < stops.stops.count) {
-                        MapPolyline(coordinates: [item.location, stops.stops[index + 1].location], contourStyle: .geodesic)
-                            .stroke(mapTrainLineToColor(train).opacity(0.55), lineWidth: 2.0)
-                    }
                 }
-                
             })
         }
     }

@@ -21,17 +21,21 @@ class TrainStopPredictionsViewModel: ObservableObject {
     var trainStop: TrainStop
     
     @Published var trainPredictions: TrainStopPredictions
-    @Published var predictionsLoading = false
+    @Published var predictionsLoading = true
     let repo = TrainRepository()
     
     func fetchPredictions(getAllStops: Bool = false) async {
         predictionsLoading = true
         guard let data = try? await repo.getArrivals(mapID: String(trainStop.mapID), line: getAllStops ? nil : trainLine) else {
-            predictionsLoading = false
+            withAnimation(.easeOut(duration: TimeInterval(0.25))) {
+                predictionsLoading = false
+            }
             return
         }
         let predictions = try? TrainStopPredictions.fromDataObject(data: data)
         trainPredictions.predictions = predictions?.predictions ?? []
-        predictionsLoading = false
+        withAnimation(.easeOut(duration: TimeInterval(0.25))) {
+            predictionsLoading = false
+        }
     }
 }

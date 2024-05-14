@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ActivityIndicatorView
 
 struct BusStopPredictionsView: View {
     let busRoute: BusRoute
@@ -29,16 +30,22 @@ struct BusStopPredictionsView: View {
                     HStack(spacing: 0) {
                         Text(busRoute.number).bold()
                         Text(" - " + busRoute.name)
-                    }.padding(.bottom, 4)
+                    }.padding(.bottom, 6)
+                    .font(.system(size: 18))
+                    .scaledToFit()
+                    .minimumScaleFactor(0.8)
                     Text(stop.name)
                         .font(.system(size: 15))
                 }
                 Spacer()
             }.padding(.horizontal, 24)
-                .padding(.bottom, 12)
+            .padding(.bottom, 12)
+            .background(Color.white)
             
             if (viewModel.predictionsLoading) {
-                ProgressView()
+                ActivityIndicatorView(isVisible: $viewModel.predictionsLoading, type: .growingArc(.blue, lineWidth: 3))
+                         .frame(width: 54.0, height: 54.0)
+                         .padding(.top, 24)
             } else if (viewModel.noScheduledService) {
                 Text("No scheduled service. Please try another stop.")
                     .font(.system(size: 14))
@@ -46,41 +53,40 @@ struct BusStopPredictionsView: View {
                     .multilineTextAlignment(.center)
             }
             else {
-                HStack{
-                    VStack(spacing: 0) {
-                        List {
-                            Section {
-                                ForEach(viewModel.busPredictions.predictions) { prediction in
-                                    HStack {
-                                        Image(systemName: "circle.fill")
-                                            .font(.system(size: 6)).foregroundColor(Color.black)
-                                        HStack(spacing: 0) {
-                                            if let pred = try? timestampDiffFromNowInMinutes(date: prediction.prediction, type: .bus, curDate: currentDate) {
-                                                Text(String(pred) + " mins left")
-                                                    .font(.system(size: 16, weight: .regular)).padding(0)
-                                                    .onReceive(timer) { input in
-                                                        currentDate = input
-                                                    }
-                                            }
-                                            Image(systemName: "arrow.forward")
-                                                .font(.system(size: 13)).foregroundColor(Color.black).padding(.leading, 12).padding(.trailing, 4)
-                                            Text(prediction.finalDestination)
+                VStack(spacing: 0) {
+                    List {
+                        Section {
+                            ForEach(viewModel.busPredictions.predictions) { prediction in
+                                HStack {
+                                    Image(systemName: "circle.fill")
+                                        .font(.system(size: 6)).foregroundColor(Color.black)
+                                    HStack(spacing: 0) {
+                                        if let pred = try? timestampDiffFromNowInMinutes(date: prediction.prediction, type: .bus, curDate: currentDate) {
+                                            Text(pred > 0 ? (String(pred) + " mins left") : "Arriving soon")
                                                 .font(.system(size: 16, weight: .regular)).padding(0)
-                                                .foregroundStyle(.gray)
-                                        }.padding(.vertical, 2)
-                                        Spacer()
-                                    }
+                                                .onReceive(timer) { input in
+                                                    currentDate = input
+                                                }
+                                        }
+                                        Image(systemName: "arrow.forward")
+                                            .font(.system(size: 13)).foregroundColor(Color.black).padding(.leading, 12).padding(.trailing, 4)
+                                        Text(prediction.finalDestination)
+                                            .font(.system(size: 16, weight: .regular)).padding(0)
+                                            .foregroundStyle(.gray)
+                                    }.padding(.vertical, 2)
+                                    Spacer()
                                 }
-                            } header: {
-                                Text("Predictions").font(.system(size: 16, weight: .semibold))
-                                    .padding(.bottom, 4)
                             }
+                        } header: {
+                            Text("Predictions").font(.system(size: 16, weight: .semibold))
+                                .padding(.bottom, 4)
                         }
                     }
                 }
             }
             Spacer()
         }
+        .background(Color(UIColor.systemGray6))
         .onAppear(perform: {
             viewModel.busRoute = busRoute
             viewModel.stop = stop

@@ -13,7 +13,7 @@ class TrainStops: ObservableObject, Observable, Identifiable {
         self.stops = stops
     }
     
-    var stops: [TrainStop]
+    @Published var stops: [TrainStop]
     
     static func fromJSON(data: [TrainStopJSONData]) -> TrainStops {
         return TrainStops(stops: data.map({ TrainStop.fromJSON($0) }))
@@ -32,6 +32,7 @@ class TrainStop: ObservableObject, Identifiable {
         self.location = location
     }
     
+    let id = UUID()
     let stopID: Int
     let directionID: String
     let stopName: String
@@ -54,7 +55,7 @@ class TrainStop: ObservableObject, Identifiable {
         if (data.P) { line.append(TrainLine.purple) }
         if (data.Pexp) { line.append(TrainLine.purpleExpress) }
         if (data.Y) { line.append(TrainLine.yellow) }
-        if (data.Pnk) { line.append(TrainLine.red) }
+        if (data.Pnk) { line.append(TrainLine.pink) }
         if (data.O) { line.append(TrainLine.orange) }
         return line
     }

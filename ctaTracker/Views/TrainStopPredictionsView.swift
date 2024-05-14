@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreLocation
 import SwiftData
+import ActivityIndicatorView
 
 struct TrainStopPredictionsView: View {
     init(train: TrainLine, trainStop: TrainStop, viewModel: TrainStopPredictionsViewModel? = nil) {
@@ -28,12 +29,17 @@ struct TrainStopPredictionsView: View {
             HStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 0) {
                     Text(trainStop.stationName).padding(.bottom, 4).padding(.top, 4).font(.system(size: 19).bold())
+                        .padding(.trailing, 36)
+                        .scaledToFit()
+                        .minimumScaleFactor(0.8)
                     Text(mapTrainLineToName(train) + " Line").font(.system(size: 15)).padding(.bottom, 12).foregroundStyle(.gray)
                 }
                 Spacer()
             }
             .padding(.leading, 24)
+            .background(Color.white)
             .padding(.bottom, -18)
+            
             HStack {
                 Spacer()
                 if (favoriteTrainStops.contains(where: { $0.stopID == trainStop.stopID })) {
@@ -52,21 +58,29 @@ struct TrainStopPredictionsView: View {
                     }
                 }
             }.offset(x: -16, y: -28)
-            
-            List {
-                ForEach(getUniqueItemsFromArray(viewModel.trainPredictions.predictions.map({ $0.destinationName })).sorted(), id: \.self) { dir in
-                    Section(dir) {
-                        ForEach(Array(viewModel.trainPredictions.predictions.filter{ $0.destinationName == dir }.enumerated()), id: \.offset) { index, prediction in
+            if viewModel.predictionsLoading {
+                ActivityIndicatorView(isVisible: $viewModel.predictionsLoading, type: .growingArc(.blue, lineWidth: 3))
+                         .frame(width: 54.0, height: 54.0)
+                         .padding(.top, 24)
+            } else {
+                List {
+                    ForEach(getUniqueItemsFromArray(viewModel.trainPredictions.predictions.map({ $0.destinationName })).sorted(), id: \.self) { dir in
+                        Section(dir) {
+                            ForEach(Array(viewModel.trainPredictions.predictions.filter{ $0.destinationName == dir }.enumerated()), id: \.offset) { index, prediction in
                                 TrainPredictionItemView(prediction: prediction)
                             }
                         }
+                    }
                 }
             }
             Spacer()
         }
+        .background(Color(UIColor.systemGray6))
         .task {
             await viewModel.fetchPredictions()
         }
+        .navigationTitle(Text(" "))
+        .navigationBarTitleDisplayMode(.inline) // change style
     }
     
     func saveItem(_ item: TrainStop) {

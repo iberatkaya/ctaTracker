@@ -18,21 +18,16 @@ struct BusTransitMapView: View {
     @ObservedObject var busRoute: BusRoute
     @ObservedObject var stops: BusRouteStops
     
-    @State var showLocation = true
-
-    @EnvironmentObject var locationManager: LocationManager
-    
     @State var position: MapCameraPosition = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 41.8781, longitude: -87.6298),
             span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
         )
     )
-    @State var updateLocation = false
 
     var body: some View {
-        ZStack {
-            MapView(position: $position, content: busRoute.number != "-1" ? {
+        MapViewContainer(position: $position, content: busRoute.number != "-1" ? {
+            Map(position: $position, interactionModes: [.pan, .zoom]) {
                 ForEach(Array(stops.stops.enumerated()), id: \.offset) { index, item in
                     Annotation(item.name, coordinate: CLLocationCoordinate2D(latitude: item.lat, longitude: item.lon)) {
                         NavigationLink(destination: { BusStopPredictionsView(busRoute: busRoute, stop: item) }){
@@ -46,8 +41,8 @@ struct BusTransitMapView: View {
                         }
                     }
                 }
-            } : { nil })
-        }
+            }
+        } : nil )
     }
 }
 

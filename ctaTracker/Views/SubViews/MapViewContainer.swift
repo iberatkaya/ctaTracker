@@ -9,60 +9,54 @@ import SwiftUI
 import CoreLocation
 import MapKit
 
-struct MapView<Content: MapContent>: View {
+struct MapViewContainer<Content: View>: View  {
     
     @Binding var position: MapCameraPosition
     @EnvironmentObject var locationManager: LocationManager
     @State var updateLocation: Bool = false
+    @State var loadedInitialLocation = false
     
-    let content: () -> Content?
+    let onSelectedLineChange: ((_ line: TrainLine) -> Void)? = nil
+    
+    let content: (() -> Content)?
 
     var body: some View {
         ZStack {
-            Map(position: $position) {
-                if let location = locationManager.location {
-                    Annotation("", coordinate: location) {
-                        LocationIndicator()
-                    }
-                }
-                content()
-            }.mapStyle(
-                .standard(
-                    elevation: .flat,
-                    pointsOfInterest: .excludingAll,
-                    showsTraffic: false
-                ))
+            content?()
+          
             Button {
                 locationManager.requestLocation()
                 updateLocation = true
             } label: {
                 ZStack {
                     Circle().fill(Color.blue.opacity(0.25))
-                        .frame(width: 48, height: 48)
+                        .frame(width: 42, height: 42)
                     Image(systemName: "location")
-                        .font(.system(size: 24))
+                        .font(.system(size: 22))
                         .foregroundColor(.blue)
                 }
             }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 .offset(x: -16, y: -16)
-        }.onAppear(perform: {
+        }.onAppear(perform: !loadedInitialLocation ? {
             if (locationManager.hasPermission()) {
                 locationManager.requestLocation()
             }
-        })
+            loadedInitialLocation = true
+        } : nil)
         .onReceive(locationManager.$location, perform: { loc in
             if updateLocation, let lat = loc?.latitude, let long = loc?.longitude {
                 withAnimation(.easeOut(duration: TimeInterval(1))) {
                     position = MapCameraPosition.region(
                         MKCoordinateRegion(
                             center: CLLocationCoordinate2D(latitude: lat, longitude: long),
-                            span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
+                            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
                         )
                     )
                 }
                updateLocation = false
             }
         })
+        
     }
 }
 
@@ -73,7 +67,9 @@ struct MapView<Content: MapContent>: View {
             span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
         )
     )
-    return MapView(position: $position, content: {
-        Marker(coordinate: CLLocationCoordinate2D(latitude: 15, longitude: 15), label: { Text("123") })
+    return MapViewContainer(position: $position, content: {
+        Map(position: $position) {
+            Marker(coordinate: CLLocationCoordinate2D(latitude: 15, longitude: 15), label: { Text("123") })
+        }
     })
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import ActivityIndicatorView
 
 struct BusRouteDetailView: View {
     @State var busRoute: BusRoute
@@ -25,7 +26,8 @@ struct BusRouteDetailView: View {
             HStack(spacing: 0) {
                 HStack(spacing: 0) {
                     Text(busRoute.number).bold()
-                    Text(" - " + busRoute.name)
+                    Text(" - ")
+                    Text(busRoute.name).scaledToFit().minimumScaleFactor(0.8)
                 }
                 
                 Spacer()
@@ -56,7 +58,9 @@ struct BusRouteDetailView: View {
             Divider()
             
             if (viewModel.stopsLoading && mapViewEnabledIndex != 0) {
-                ProgressView()
+                ActivityIndicatorView(isVisible: $viewModel.stopsLoading, type: .growingArc(.blue, lineWidth: 3))
+                         .frame(width: 54.0, height: 54.0)
+                         .padding(.top, 24)
                 Spacer()
             } else {
                 VStack {

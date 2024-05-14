@@ -36,7 +36,10 @@ class BusRouteDetailsViewModel: ObservableObject {
         stopsLoading = true
         guard let res = await repo.getRouteStops(routeNumber: busRoute.number, direction: direction) else { return }
         busRouteStops.stops = BusRouteStops.fromDataObject(data: res).stops
-        stopsLoading = false
-        didFetchStopsData = true
+        
+        withAnimation(.easeOut(duration: TimeInterval(0.1))) {
+            stopsLoading = false
+            didFetchStopsData = true
+        }
     }
 }

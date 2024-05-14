@@ -6,17 +6,12 @@
 //
 
 import SwiftUI
-import Alamofire
 
 struct MainTrainView: View {
-    @StateObject var viewModel = MainTrainViewModel()
-    
     var body: some View {
         NavigationStack {
             TrainRoutesView()
-        }.task {
-            await viewModel.loadJSON()
-        }.environment(viewModel.trainStops)
+        }
     }
 }
 

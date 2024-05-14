@@ -24,11 +24,10 @@
 		F419474A2BE1C540000F374B /* TrainLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947492BE1C540000F374B /* TrainLine.swift */; };
 		F41947502BE1CA9B000F374B /* TrainRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F419474F2BE1CA9B000F374B /* TrainRoutes.swift */; };
 		F41947522BE1CEAE000F374B /* MainTrainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947512BE1CEAE000F374B /* MainTrainView.swift */; };
-		F41947542BE1CEC6000F374B /* MainTrainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947532BE1CEC6000F374B /* MainTrainViewModel.swift */; };
+		F41947542BE1CEC6000F374B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947532BE1CEC6000F374B /* MainViewModel.swift */; };
 		F41947562BE1DCA4000F374B /* TrainRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947552BE1DCA4000F374B /* TrainRoutesView.swift */; };
 		F41947582BE1DCF6000F374B /* TrainRouteItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947572BE1DCF6000F374B /* TrainRouteItemView.swift */; };
 		F41947622BE46A60000F374B /* ctaTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41947612BE46A60000F374B /* ctaTrackerTests.swift */; };
-		F41947692BE4736E000F374B /* stations.json in Resources */ = {isa = PBXBuildFile; fileRef = F41947682BE4736E000F374B /* stations.json */; };
 		F419476B2BE473BA000F374B /* TrainStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = F419476A2BE473BA000F374B /* TrainStops.swift */; };
 		F419476D2BE4854D000F374B /* GetTrainArrivalsAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F419476C2BE4854D000F374B /* GetTrainArrivalsAPIResponse.swift */; };
 		F419476F2BE5AD9E000F374B /* TrainDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F419476E2BE5AD9E000F374B /* TrainDetailsView.swift */; };
@@ -48,10 +47,14 @@
 		F48AA7F82BEED3850084E0B9 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = F48AA7F72BEED3850084E0B9 /* ActivityIndicatorView */; };
 		F48AA7FA2BEFC5BE0084E0B9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48AA7F92BEFC5BE0084E0B9 /* LocationManager.swift */; };
 		F48AA7FC2BEFD6D40084E0B9 /* LocationIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48AA7FB2BEFD6D40084E0B9 /* LocationIndicator.swift */; };
-		F48AA7FE2BEFD71D0084E0B9 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48AA7FD2BEFD71D0084E0B9 /* MapView.swift */; };
+		F48AA7FE2BEFD71D0084E0B9 /* MapViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48AA7FD2BEFD71D0084E0B9 /* MapViewContainer.swift */; };
+		F48AA8002BF03CD60084E0B9 /* AllTransitMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48AA7FF2BF03CD60084E0B9 /* AllTransitMapView.swift */; };
+		F48AA8022BF03E400084E0B9 /* TrainStopAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48AA8012BF03E400084E0B9 /* TrainStopAnnotation.swift */; };
+		F48AA8042BF052010084E0B9 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48AA8032BF052010084E0B9 /* MainMapView.swift */; };
+		F48AA8062BF060F40084E0B9 /* stations.json in Resources */ = {isa = PBXBuildFile; fileRef = F48AA8052BF060F40084E0B9 /* stations.json */; };
+		F48AA8082BF061220084E0B9 /* TrainStopEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48AA8072BF061220084E0B9 /* TrainStopEntity.swift */; };
 		F4DCC5D62BE9B95700681317 /* TrainStopItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DCC5D52BE9B95700681317 /* TrainStopItemView.swift */; };
 		F4DCC5D82BEB103C00681317 /* TrainTransitMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DCC5D72BEB103C00681317 /* TrainTransitMapView.swift */; };
-		F4DCC5DC2BEB31D600681317 /* TrainStopEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DCC5DA2BEB31D600681317 /* TrainStopEntity.swift */; };
 		F4DCC5E12BEDAD4000681317 /* FavoriteItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DCC5E02BEDAD4000681317 /* FavoriteItemView.swift */; };
 		F4DCC5E32BEDADE700681317 /* FavoriteTrainStopsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DCC5E22BEDADE700681317 /* FavoriteTrainStopsView.swift */; };
 		F4EFBC4C2BD7565700CD7035 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F4EFBC4B2BD7565700CD7035 /* Alamofire */; };
@@ -125,12 +128,11 @@
 		F41947492BE1C540000F374B /* TrainLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainLine.swift; sourceTree = "<group>"; };
 		F419474F2BE1CA9B000F374B /* TrainRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainRoutes.swift; sourceTree = "<group>"; };
 		F41947512BE1CEAE000F374B /* MainTrainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTrainView.swift; sourceTree = "<group>"; };
-		F41947532BE1CEC6000F374B /* MainTrainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTrainViewModel.swift; sourceTree = "<group>"; };
+		F41947532BE1CEC6000F374B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		F41947552BE1DCA4000F374B /* TrainRoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainRoutesView.swift; sourceTree = "<group>"; };
 		F41947572BE1DCF6000F374B /* TrainRouteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainRouteItemView.swift; sourceTree = "<group>"; };
 		F419475F2BE46A60000F374B /* ctaTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ctaTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F41947612BE46A60000F374B /* ctaTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ctaTrackerTests.swift; sourceTree = "<group>"; };
-		F41947682BE4736E000F374B /* stations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = stations.json; path = ../../../../Downloads/stations.json; sourceTree = "<group>"; };
 		F419476A2BE473BA000F374B /* TrainStops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainStops.swift; sourceTree = "<group>"; };
 		F419476C2BE4854D000F374B /* GetTrainArrivalsAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTrainArrivalsAPIResponse.swift; sourceTree = "<group>"; };
 		F419476E2BE5AD9E000F374B /* TrainDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainDetailsView.swift; sourceTree = "<group>"; };
@@ -150,10 +152,14 @@
 		F43AC3232BD751D00093767E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F48AA7F92BEFC5BE0084E0B9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		F48AA7FB2BEFD6D40084E0B9 /* LocationIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationIndicator.swift; sourceTree = "<group>"; };
-		F48AA7FD2BEFD71D0084E0B9 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		F48AA7FD2BEFD71D0084E0B9 /* MapViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewContainer.swift; sourceTree = "<group>"; };
+		F48AA7FF2BF03CD60084E0B9 /* AllTransitMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransitMapView.swift; sourceTree = "<group>"; };
+		F48AA8012BF03E400084E0B9 /* TrainStopAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainStopAnnotation.swift; sourceTree = "<group>"; };
+		F48AA8032BF052010084E0B9 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
+		F48AA8052BF060F40084E0B9 /* stations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stations.json; sourceTree = "<group>"; };
+		F48AA8072BF061220084E0B9 /* TrainStopEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainStopEntity.swift; sourceTree = "<group>"; };
 		F4DCC5D52BE9B95700681317 /* TrainStopItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainStopItemView.swift; sourceTree = "<group>"; };
 		F4DCC5D72BEB103C00681317 /* TrainTransitMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainTransitMapView.swift; sourceTree = "<group>"; };
-		F4DCC5DA2BEB31D600681317 /* TrainStopEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrainStopEntity.swift; path = ../../TrainStopEntity.swift; sourceTree = "<group>"; };
 		F4DCC5E02BEDAD4000681317 /* FavoriteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItemView.swift; sourceTree = "<group>"; };
 		F4DCC5E22BEDADE700681317 /* FavoriteTrainStopsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTrainStopsView.swift; sourceTree = "<group>"; };
 		F4EFBC492BD7549800CD7035 /* APIKey.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = APIKey.xcconfig; sourceTree = "<group>"; };
@@ -199,7 +205,7 @@
 		F419472A2BDD451B000F374B /* CoreDataEntities */ = {
 			isa = PBXGroup;
 			children = (
-				F4DCC5DA2BEB31D600681317 /* TrainStopEntity.swift */,
+				F48AA8072BF061220084E0B9 /* TrainStopEntity.swift */,
 				F41947292BDD451B000F374B /* BusRouteEntity.swift */,
 			);
 			path = CoreDataEntities;
@@ -221,8 +227,9 @@
 				F4DCC5E02BEDAD4000681317 /* FavoriteItemView.swift */,
 				F4DCC5D52BE9B95700681317 /* TrainStopItemView.swift */,
 				F41947762BE87DF2000F374B /* TrainPredictionItemView.swift */,
-				F48AA7FD2BEFD71D0084E0B9 /* MapView.swift */,
+				F48AA7FD2BEFD71D0084E0B9 /* MapViewContainer.swift */,
 				F48AA7FB2BEFD6D40084E0B9 /* LocationIndicator.swift */,
+				F48AA8012BF03E400084E0B9 /* TrainStopAnnotation.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -232,7 +239,7 @@
 			children = (
 				F419473F2BDEC920000F374B /* BusRoutesViewModel.swift */,
 				F41947412BDEC9A8000F374B /* MainBusViewModel.swift */,
-				F41947532BE1CEC6000F374B /* MainTrainViewModel.swift */,
+				F41947532BE1CEC6000F374B /* MainViewModel.swift */,
 				F41947432BDECEF7000F374B /* BusRouteDetailsViewModel.swift */,
 				F41947452BDED2F3000F374B /* BusStopPredictionsViewModel.swift */,
 				F41947722BE5B691000F374B /* TrainStopPredictionsViewModel.swift */,
@@ -293,8 +300,8 @@
 			isa = PBXGroup;
 			children = (
 				F4EFBC582BD75A7800CD7035 /* Info.plist */,
+				F48AA8052BF060F40084E0B9 /* stations.json */,
 				F43AC30A2BD751CE0093767E /* ctaTrackerApp.swift */,
-				F41947682BE4736E000F374B /* stations.json */,
 				F419473E2BDEC90C000F374B /* ViewModels */,
 				F41947302BDD59D5000F374B /* Utils */,
 				F419472A2BDD451B000F374B /* CoreDataEntities */,
@@ -373,6 +380,7 @@
 			children = (
 				F43AC30C2BD751CE0093767E /* MainBusView.swift */,
 				F41947512BE1CEAE000F374B /* MainTrainView.swift */,
+				F48AA8032BF052010084E0B9 /* MainMapView.swift */,
 				F419473B2BDE9C7A000F374B /* SubViews */,
 				F4EFBC642BD9E80C00CD7035 /* BusRoutesView.swift */,
 				F41947552BE1DCA4000F374B /* TrainRoutesView.swift */,
@@ -380,6 +388,7 @@
 				F419476E2BE5AD9E000F374B /* TrainDetailsView.swift */,
 				F41947702BE5B5E1000F374B /* TrainStopPredictionsView.swift */,
 				F4EFBC692BD9EAC200CD7035 /* BusRouteDetailView.swift */,
+				F48AA7FF2BF03CD60084E0B9 /* AllTransitMapView.swift */,
 				F4DCC5D72BEB103C00681317 /* TrainTransitMapView.swift */,
 				F41947392BDE9AD0000F374B /* BusTransitMapView.swift */,
 				F41947372BDD6209000F374B /* BusStopPredictionsView.swift */,
@@ -529,7 +538,7 @@
 			files = (
 				F43AC3122BD751CF0093767E /* Preview Assets.xcassets in Resources */,
 				F43AC30F2BD751CF0093767E /* Assets.xcassets in Resources */,
-				F41947692BE4736E000F374B /* stations.json in Resources */,
+				F48AA8062BF060F40084E0B9 /* stations.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,7 +573,7 @@
 				F4DCC5E32BEDADE700681317 /* FavoriteTrainStopsView.swift in Sources */,
 				F41947342BDD5F83000F374B /* GetBusStopPredictionsAPIResponse.swift in Sources */,
 				F43AC30D2BD751CE0093767E /* MainBusView.swift in Sources */,
-				F48AA7FE2BEFD71D0084E0B9 /* MapView.swift in Sources */,
+				F48AA7FE2BEFD71D0084E0B9 /* MapViewContainer.swift in Sources */,
 				F41947322BDD59DD000F374B /* Utils.swift in Sources */,
 				F41947582BE1DCF6000F374B /* TrainRouteItemView.swift in Sources */,
 				F41947562BE1DCA4000F374B /* TrainRoutesView.swift in Sources */,
@@ -585,18 +594,21 @@
 				F41947712BE5B5E1000F374B /* TrainStopPredictionsView.swift in Sources */,
 				F4EFBC5D2BD75CBA00CD7035 /* GetBusRoutesAPIResponse.swift in Sources */,
 				F419474A2BE1C540000F374B /* TrainLine.swift in Sources */,
-				F41947542BE1CEC6000F374B /* MainTrainViewModel.swift in Sources */,
-				F4DCC5DC2BEB31D600681317 /* TrainStopEntity.swift in Sources */,
+				F48AA8002BF03CD60084E0B9 /* AllTransitMapView.swift in Sources */,
+				F41947542BE1CEC6000F374B /* MainViewModel.swift in Sources */,
 				F41947522BE1CEAE000F374B /* MainTrainView.swift in Sources */,
 				F419476D2BE4854D000F374B /* GetTrainArrivalsAPIResponse.swift in Sources */,
 				F4DCC5D62BE9B95700681317 /* TrainStopItemView.swift in Sources */,
+				F48AA8082BF061220084E0B9 /* TrainStopEntity.swift in Sources */,
 				F41947772BE87DF2000F374B /* TrainPredictionItemView.swift in Sources */,
 				F41947422BDEC9A8000F374B /* MainBusViewModel.swift in Sources */,
+				F48AA8022BF03E400084E0B9 /* TrainStopAnnotation.swift in Sources */,
 				F4EFBC602BD9E2E600CD7035 /* BusRoutes.swift in Sources */,
 				F4EFBC6E2BD9ED1100CD7035 /* BusDirections.swift in Sources */,
 				F4EFBC742BD9F4E800CD7035 /* Favorites.xcdatamodeld in Sources */,
 				F43AC30B2BD751CE0093767E /* ctaTrackerApp.swift in Sources */,
 				F41947382BDD6209000F374B /* BusStopPredictionsView.swift in Sources */,
+				F48AA8042BF052010084E0B9 /* MainMapView.swift in Sources */,
 				F41947462BDED2F3000F374B /* BusStopPredictionsViewModel.swift in Sources */,
 				F41947482BE1C3BA000F374B /* TrainRepository.swift in Sources */,
 				F41947732BE5B691000F374B /* TrainStopPredictionsViewModel.swift in Sources */,
