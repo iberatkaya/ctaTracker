@@ -16,6 +16,7 @@ struct MapViewContainer<Content: View>: View  {
     @State var updateLocation: Bool = false
     @State var loadedInitialLocation = false
     
+    
     let onSelectedLineChange: ((_ line: TrainLine) -> Void)? = nil
     
     let content: (() -> Content)?
@@ -37,6 +38,21 @@ struct MapViewContainer<Content: View>: View  {
                 }
             }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 .offset(x: -16, y: -16)
+            
+            
+              Button {
+                  locationManager.requestLocation()
+                  updateLocation = true
+              } label: {
+                  ZStack {
+                      Circle().fill(Color.blue.opacity(0.25))
+                          .frame(width: 42, height: 42)
+                      Image(systemName: "arrow.uturn.right")
+                          .font(.system(size: 22))
+                          .foregroundColor(.blue)
+                  }
+              }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                  .offset(x: -16, y: -64)
         }.onAppear(perform: !loadedInitialLocation ? {
             if (locationManager.hasPermission()) {
                 locationManager.requestLocation()
@@ -49,7 +65,7 @@ struct MapViewContainer<Content: View>: View  {
                     position = MapCameraPosition.region(
                         MKCoordinateRegion(
                             center: CLLocationCoordinate2D(latitude: lat, longitude: long),
-                            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                            span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
                         )
                     )
                 }

@@ -32,6 +32,18 @@ class BusRepository {
         return res
     }
     
+    func getRoutePatterns(routeNumber: String) async -> GetBusRoutePatternsAPIResponse? {
+        let url = "https://www.ctabustracker.com/bustime/api/v2/getpatterns?key=" + key + "&format=json&rt=" + routeNumber
+        do {
+            let res = try await AF.request(url, method: .get).serializingDecodable(GetBusRoutePatternsAPIResponse.self).result.get()
+            
+            return res
+        } catch {
+            print(error)
+        }
+        return nil
+    }
+    
     func getRouteStopPredictions(routeNumber: String,stopID: String) async -> GetBusStopPredictionsAPIResponse? {
         let url = "https://www.ctabustracker.com/bustime/api/v2/getpredictions?key=" + key + "&format=json&rt=" + routeNumber + "&stpid=" + stopID
         let res = await AF.request(url, method: .get).serializingDecodable(GetBusStopPredictionsAPIResponse.self).result

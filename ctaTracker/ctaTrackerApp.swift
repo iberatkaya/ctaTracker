@@ -11,7 +11,6 @@ import CoreLocation
 
 @main
 struct ctaTrackerApp: App {
-    
     init() {
         UISegmentedControl.appearance().backgroundColor = .systemBlue.withAlphaComponent(0.08)
         UISegmentedControl.appearance().setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)

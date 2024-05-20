@@ -13,7 +13,7 @@ struct AllTransitMapView: View {
     @State var position = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 41.8781, longitude: -87.6298),
-            span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
+            span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
         )
     )
     @EnvironmentObject var locationManager: LocationManager
@@ -60,10 +60,9 @@ struct AllTransitMapView: View {
                 position = MapCameraPosition.region(
                     MKCoordinateRegion(
                         center: CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude),
-                        span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
+                        span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
                     )
                 )
-                focusLocationOnLaunch = false
             }
         })
     }

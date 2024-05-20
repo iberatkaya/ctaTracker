@@ -24,17 +24,34 @@ struct TrainPredictionItemView: View {
             HStack(spacing: 0) {
                 if let pred = try? timestampDiffFromNowInMinutes(date: prediction.arrivalTime, type: .train, curDate: currentDate) {
                     Text(pred > 0 ? (String(pred)
-                         + " minutes left") : "Arriving soon").padding(0).font(.system(size: 16, weight: .regular))
-                        .onReceive(timer) { input in
-                            currentDate = input
-                        }
+                         + "m left") : "Arriving soon")
+                    .padding(0)
+                    #if os(iOS)
+                    .font(.system(size: 16, weight: .regular))
+                    #elseif os(watchOS)
+                    .font(.system(size: 11, weight: .regular))
+                    #endif
+                    .onReceive(timer) { input in
+                        currentDate = input
+                    }
                 } else {
                     Text("Time couldn't be found")
                 }
                 Image(systemName: "arrow.forward")
-                    .font(.system(size: 13)).foregroundColor(Color.black).padding(.leading, 12).padding(.trailing, 4)
+                    #if os(iOS)
+                    .font(.system(size: 13))
+                    #elseif os(watchOS)
+                    .font(.system(size: 11))
+                    #endif
+                    .foregroundColor(Color.black).padding(.leading, 12)
+                    .padding(.trailing, 4)
                 Text(prediction.destinationName)
-                    .font(.system(size: 16, weight: .regular)).padding(0)
+                    #if os(iOS)
+                    .font(.system(size: 16, weight: .regular))
+                    #elseif os(watchOS)
+                    .font(.system(size: 11, weight: .regular))
+                    #endif
+                    .padding(0)
                     .foregroundStyle(.gray)
             }.padding(.vertical, 2)
             Spacer()

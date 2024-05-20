@@ -17,7 +17,7 @@ struct TrainTransitMapView: View {
         _position = State(wrappedValue: MapCameraPosition.region(
             MKCoordinateRegion(
                 center: CLLocationCoordinate2D(latitude: !stops.stops.isEmpty ? stops.stops[(stops.stops.count - 1) / 2].location.latitude : 41.8781, longitude: !stops.stops.isEmpty ? stops.stops[(stops.stops.count - 1) / 2].location.longitude : -87.6298),
-                span: MKCoordinateSpan(latitudeDelta: 0.15, longitudeDelta: 0.15)
+                span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
             )
         ))
     }

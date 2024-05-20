@@ -34,14 +34,26 @@ struct TrainStopItemView: View {
             Text(title ?? stop.stationName)
                 .swipeActions {
                     if (isFaved) {
-                        Button("Delete") {
+                        Button(action: {
                             onDeletePress(stop)
-                        }
+                        }, label: {
+                            #if os(iOS)
+                            Text("Delete")
+                            #elseif os(watchOS)
+                            Image(systemName: "trash.fill")
+                            #endif
+                        })
                         .tint(.red)
                     } else {
-                        Button("Save") {
+                        Button(action: {
                             onSavePress(stop)
-                        }
+                        }, label: {
+                            #if os(iOS)
+                            Text("Save")
+                            #elseif os(watchOS)
+                            Image(systemName: "star.fill")
+                            #endif
+                        })
                         .tint(.yellow)
                     }
                 }
@@ -50,5 +62,5 @@ struct TrainStopItemView: View {
 }
 
 #Preview {
-    TrainStopItemView(train: .red, stop: TrainStop(stopID: 123, directionID: "123", stopName: "Test", stationName: "Test", stationDescription: "Test (Red Line)", mapID: 123, lines: [.red], location: CLLocationCoordinate2D(latitude: 12, longitude: 12)), isFaved: true, onSavePress: {_ in }, onDeletePress: {_ in })
+    TrainStopItemView(train: .red, stop: TrainStop(stopID: 123, directionID: "123", stopName: "Test", stationName: "Test", stationDescription: "Test (Red Line)", mapID: 123, lines: [.red], location: CLLocationCoordinate2D(latitude: 12, longitude: 12)), isFaved: false, onSavePress: {_ in }, onDeletePress: {_ in })
 }
