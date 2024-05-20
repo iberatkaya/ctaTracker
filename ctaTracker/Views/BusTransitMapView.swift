@@ -10,19 +10,23 @@ import MapKit
 import ActivityIndicatorView
 
 struct BusTransitMapView: View {
-    init(busRoute: BusRoute, stops: BusRouteStops) {
+    init(busRoute: BusRoute, stops: BusRouteStops, patterns: BusPatterns? = nil, direction: String? = nil) {
         self.busRoute = busRoute
         self.stops = stops
+        self.patterns = patterns ?? BusPatterns(patterns: [])
+        self.direction = direction
     }
     
     @ObservedObject var busRoute: BusRoute
     @ObservedObject var stops: BusRouteStops
+    @ObservedObject var patterns: BusPatterns
+    var direction: String?
     @EnvironmentObject var locationManager: LocationManager
     
     @State var position: MapCameraPosition = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 41.8781, longitude: -87.6298),
-            span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
+            span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
         )
     )
 
@@ -47,11 +51,21 @@ struct BusTransitMapView: View {
                         }
                     }
                 }
+                if let direction, let pattern = patterns.patterns.first(where: { i in
+                    i.routeDirection == direction
+                }) {
+                    ForEach(Array(pattern.points.enumerated()), id: \.offset) { index, item in
+                        if (index + 1 < pattern.points.count) {
+                            MapPolyline(coordinates: [item.location, pattern.points[index + 1].location], contourStyle: .geodesic)
+                                .stroke(.blue.opacity(0.55), lineWidth: 3.0)
+                        }
+                    }
+                }
             }
         } : nil )
     }
 }
 
 #Preview {
-    BusTransitMapView(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), stops: BusRouteStops(stops: [BusRouteStop(stopID: "123", name: "My Stop", lat: 41.88, lon: -87.627)]))
+    BusTransitMapView(busRoute: BusRoute(number: "151", name: "Sheridan", color: "#f0f"), stops: BusRouteStops(stops: [BusRouteStop(stopID: "123", name: "My Stop", lat: 41.88, lon: -87.627)]), patterns: BusPatterns(patterns: []))
 }

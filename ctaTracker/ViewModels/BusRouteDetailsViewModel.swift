@@ -24,6 +24,7 @@ class BusRouteDetailsViewModel: ObservableObject {
     @Published var stopsLoading = false
     @Published var didFetchStopsData = false
     @Published var didFetchDirectionData = false
+    @Published var busPatterns: BusPatterns = BusPatterns(patterns: [])
     let repo = BusRepository()
     
     func fetchDirections() async {
@@ -41,5 +42,10 @@ class BusRouteDetailsViewModel: ObservableObject {
             stopsLoading = false
             didFetchStopsData = true
         }
+    }
+    
+    func fetchPatterns() async {
+        guard let patternsData = await repo.getRoutePatterns(routeNumber: busRoute.number) else { return }
+        busPatterns = BusPatterns.fromDataObject(data: patternsData)
     }
 }

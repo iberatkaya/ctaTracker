@@ -1,8 +1,8 @@
 //
 //  TrainRoutesView.swift
-//  ctaTracker
+//  ctaTracker Watch App
 //
-//  Created by Ibrahim Berat Kaya on 4/30/24.
+//  Created by Ibrahim Berat Kaya on 5/19/24.
 //
 
 import SwiftUI
@@ -17,32 +17,32 @@ struct TrainRoutesView: View {
             Divider()
             ScrollView {
                 LazyVGrid(
-                    columns: [GridItem(spacing: 20), GridItem(spacing: 0)],
-                    spacing: 20
+                    columns: [GridItem(spacing: 12), GridItem(spacing: 0)],
+                    spacing: 12
                 ) {
-                    if !trainStops.stops.isEmpty {
-                        NavigationLink(destination: FavoriteTrainStopsView(), label: {
+                    if !favoriteTrainStops.isEmpty {
+                        NavigationLink(destination: EmptyView(), label: {
                             FavoriteItemView()
                         })
+                        .buttonStyle(PlainButtonStyle())
                     }
                     
                     ForEach(TrainLine.allCases, id: \.rawValue) { route in
                         NavigationLink(destination: TrainDetailsView(train: route), label: {
                             TrainLineItemView(line: route)
                         })
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
-                .padding(.top, 12)
-                .padding(.horizontal, 24)
+                .padding(.top, 4)
+                .padding(.horizontal, 4)
                 Spacer()
             }
-            .navigationBarTitle("CTA Tracker", displayMode: .inline)
         }
     }
 }
 
 #Preview {
     TrainRoutesView()
-        .environmentObject(BusRoutes(routes: [BusRoute(number: "151", name: "Sheridan", color: "#f0f")]))
         .environmentObject(TrainStops(stops: []))
 }

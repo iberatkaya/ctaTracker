@@ -49,6 +49,7 @@ struct BusStopPredictionsView: View {
             } else if (viewModel.noScheduledService) {
                 Text("No scheduled service. Please try another stop.")
                     .font(.system(size: 14))
+                    .padding(.top, 16)
                     .padding(.horizontal, 16)
                     .multilineTextAlignment(.center)
             }

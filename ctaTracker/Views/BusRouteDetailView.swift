@@ -82,7 +82,7 @@ struct BusRouteDetailView: View {
                 
                 TabView(selection: $mapViewEnabledIndex) {
                     VStack{
-                        BusTransitMapView(busRoute: viewModel.busRoute, stops: viewModel.busRouteStops)
+                        BusTransitMapView(busRoute: viewModel.busRoute, stops: viewModel.busRouteStops, patterns: viewModel.busPatterns, direction: viewModel.busDirections.directions.count > 0 ? viewModel.busDirections.directions[directionIndex] : nil)
                     }.tag(0)
                     
                     VStack(spacing: 0) {
@@ -110,6 +110,7 @@ struct BusRouteDetailView: View {
             await viewModel.fetchDirections()
             if (viewModel.didFetchStopsData) { return }
             await viewModel.fetchStops(direction: viewModel.busDirections.directions[self.directionIndex])
+            await viewModel.fetchPatterns()
         })
         .padding(.top, 8)
     }
