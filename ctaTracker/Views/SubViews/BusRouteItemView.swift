@@ -27,20 +27,31 @@ struct BusRouteItemView: View {
                     .font(.system(size: 16, weight: .light)).foregroundColor(Color.yellow)
                     .padding(.trailing, 8)
             }
-            Text(route.number).bold()
-            Text(" - " + route.name)
+            (Text(route.number).bold() + Text(" - " + route.name)).font(.system(size: 15))
                 
         }.padding(.vertical, 4)
         .swipeActions {
             if (isFaved) {
-                Button("Delete") {
+                Button(action: {
                     onDeletePress(route)
-                }
+                }, label: {
+                    #if os(iOS)
+                    Text("Delete")
+                    #elseif os(watchOS)
+                    Image(systemName: "trash.fill")
+                    #endif
+                })
                 .tint(.red)
             } else {
-                Button("Save") {
+                Button(action: {
                     onSavePress(route)
-                }
+                }, label: {
+                    #if os(iOS)
+                    Text("Save")
+                    #elseif os(watchOS)
+                    Image(systemName: "star.fill")
+                    #endif
+                })
                 .tint(.yellow)
             }
         }

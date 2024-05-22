@@ -156,3 +156,17 @@ func getAllStopsMarkers(_ allStops: [TrainStop]) -> [TrainStop] {
     }
     return groupedStops
 }
+
+func orderBusStops(_ busStops: [BusRouteStop], _ patterns: BusPattern) -> [BusRouteStop] {
+    var stops: [BusRouteStop] = []
+    
+    for point in patterns.points {
+        if let stop = busStops.first(where: { busStop in
+            busStop.stopID == point.stopID
+        }) {
+            stops.append(stop)
+        }
+    }
+    
+    return stops
+}
