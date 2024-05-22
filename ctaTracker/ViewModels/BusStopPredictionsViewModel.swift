@@ -20,7 +20,6 @@ class BusStopPredictionsViewModel: ObservableObject {
     var busRoute: BusRoute
     var stop: BusRouteStop
     @Published var busPredictions: BusStopPredictions
-    //    @Query(sort: \BusRouteEntity.number) var favoriteBusRoutes: [BusRouteEntity]
     @Environment(\.modelContext) var modelContext
     @Published var predictionsLoading = false
     @Published var noScheduledService = false

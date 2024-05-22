@@ -8,7 +8,6 @@
 import SwiftUI
 import CoreLocation
 import SwiftData
-import ActivityIndicatorView
 
 struct TrainStopPredictionsView: View {
     init(train: TrainLine, trainStop: TrainStop, viewModel: TrainStopPredictionsViewModel? = nil) {
@@ -71,7 +70,6 @@ struct TrainStopPredictionsView: View {
                     }
                 }.padding(.horizontal, 2)
             }
-            Spacer()
         }
         .task {
             await viewModel.fetchPredictions()

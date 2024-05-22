@@ -39,7 +39,7 @@ struct TrainDetailsView: View {
                     EmptyView()
                 }
             }
-        }
+        }.padding(.horizontal, 2)
     }
     
     func saveItem(_ item: TrainStop) {

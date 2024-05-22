@@ -21,7 +21,7 @@ struct TrainRoutesView: View {
                     spacing: 12
                 ) {
                     if !favoriteTrainStops.isEmpty {
-                        NavigationLink(destination: EmptyView(), label: {
+                        NavigationLink(destination: FavoriteTrainStopsView(), label: {
                             FavoriteItemView()
                         })
                         .buttonStyle(PlainButtonStyle())
@@ -38,7 +38,7 @@ struct TrainRoutesView: View {
                 .padding(.horizontal, 4)
                 Spacer()
             }
-        }
+        }.padding(.horizontal, 2)
     }
 }
 

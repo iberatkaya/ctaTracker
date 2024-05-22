@@ -7,23 +7,66 @@
 
 import SwiftUI
 import ActivityIndicatorView
+import SwiftData
 
 struct BusRoutesView: View {
     @ObservedObject var viewModel = BusRoutesViewModel(routes: [])
+    @EnvironmentObject var busRoutes: BusRoutes
+    @Query(sort: \BusRouteEntity.number) var favoriteBusRoutes: [BusRouteEntity]
+    @Environment(\.modelContext) var modelContext
     
     var body: some View {
         List {
             if viewModel.isLoading {
-                ActivityIndicatorView(isVisible: $viewModel.isLoading, type: .growingArc(.blue, lineWidth: 3))
-                     .frame(width: 54.0, height: 54.0)
+                ProgressView()
             } else {
-                ForEach(viewModel.busRoutes.routes, id: \.name) { i in
-                    Text("\(i.number) - \(i.name)")
+                if !favoriteBusRoutes.isEmpty {
+                    Section(header: Text("Favorite Routes")) {
+                        ForEach(favoriteBusRoutes.sorted(by: { a, b in
+                            let aNumArr = parseNumbersFromString(a.number)
+                            let bNumArr = parseNumbersFromString(b.number)
+                            if let aNum = aNumArr.first, let bNum = bNumArr.first {
+                                return aNum < bNum
+                            }
+                            return true
+                        }), id: \.name) { routeData in
+                            let route = BusRoute.fromDataObject(data: routeData)
+                            NavigationLink {
+                                BusRouteDetailView(busRoute: route)
+                            } label: {
+                                BusRouteItemView(route: route, onSavePress: saveItem, onDeletePress: removeItem, isFaved: favoriteBusRoutes.map({ $0.number }).contains(route.number))
+                            }
+                        }
+                    }
+                }
+                Section(header: Text("Bus Routes")) {
+                    ForEach(viewModel.busRoutes.routes, id: \.name) { route in
+                        NavigationLink {
+                            BusRouteDetailView(busRoute: route)
+                        } label: {
+                            BusRouteItemView(route: route, onSavePress: saveItem, onDeletePress: removeItem, isFaved: favoriteBusRoutes.map({ $0.number }).contains(route.number))
+                        }
+                    }
                 }
             }
         }
+        .padding(.horizontal, 2)
         .task {
             _ = await viewModel.fetchData()
+        }
+    }
+    
+    
+    func saveItem(_ item: BusRoute) {
+        let entity = item.toDataModel()
+        modelContext.insert(entity)
+        try? modelContext.save()
+    }
+    
+    func removeItem(_ item: BusRoute) {
+        let entity = favoriteBusRoutes.first(where: { $0.number == item.number })
+        if let entity {
+            modelContext.delete(entity)
         }
     }
 }

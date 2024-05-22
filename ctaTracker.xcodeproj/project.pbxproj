@@ -42,6 +42,9 @@
 		F43AC31D2BD751CF0093767E /* ctaTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AC31C2BD751CF0093767E /* ctaTrackerApp.swift */; };
 		F43AC3212BD751D00093767E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43AC3202BD751D00093767E /* Assets.xcassets */; };
 		F43AC3242BD751D00093767E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43AC3232BD751D00093767E /* Preview Assets.xcassets */; };
+		F46FAD592BFD6F9F0079F165 /* FavoriteTrainStopsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FAD582BFD6F9F0079F165 /* FavoriteTrainStopsView.swift */; };
+		F46FAD5B2BFD735D0079F165 /* BusStopPredictionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FAD5A2BFD735D0079F165 /* BusStopPredictionsView.swift */; };
+		F46FAD5D2BFD75EF0079F165 /* BusRouteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FAD5C2BFD75EF0079F165 /* BusRouteDetailView.swift */; };
 		F486492C2BF6E014004C3B32 /* GetBusRoutePatternsAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486492B2BF6E014004C3B32 /* GetBusRoutePatternsAPIResponse.swift */; };
 		F486492E2BF6E0E8004C3B32 /* BusPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486492D2BF6E0E8004C3B32 /* BusPatterns.swift */; };
 		F48AA7F82BEED3850084E0B9 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = F48AA7F72BEED3850084E0B9 /* ActivityIndicatorView */; };
@@ -186,6 +189,9 @@
 		F43AC31C2BD751CF0093767E /* ctaTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ctaTrackerApp.swift; sourceTree = "<group>"; };
 		F43AC3202BD751D00093767E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F43AC3232BD751D00093767E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F46FAD582BFD6F9F0079F165 /* FavoriteTrainStopsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTrainStopsView.swift; sourceTree = "<group>"; };
+		F46FAD5A2BFD735D0079F165 /* BusStopPredictionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopPredictionsView.swift; sourceTree = "<group>"; };
+		F46FAD5C2BFD75EF0079F165 /* BusRouteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteDetailView.swift; sourceTree = "<group>"; };
 		F486492B2BF6E014004C3B32 /* GetBusRoutePatternsAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBusRoutePatternsAPIResponse.swift; sourceTree = "<group>"; };
 		F486492D2BF6E0E8004C3B32 /* BusPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusPatterns.swift; sourceTree = "<group>"; };
 		F48AA7F92BEFC5BE0084E0B9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -466,9 +472,12 @@
 			children = (
 				F4F447982BFAC95500CFBA3A /* MainView.swift */,
 				F4F4479A2BFACA5700CFBA3A /* BusRoutesView.swift */,
+				F46FAD582BFD6F9F0079F165 /* FavoriteTrainStopsView.swift */,
 				F4F4479C2BFACB4600CFBA3A /* TrainRoutesView.swift */,
 				F4F447A32BFAD8C700CFBA3A /* TrainDetailsView.swift */,
+				F46FAD5C2BFD75EF0079F165 /* BusRouteDetailView.swift */,
 				F4F447A62BFADEE400CFBA3A /* TrainStopPredictionsView.swift */,
+				F46FAD5A2BFD735D0079F165 /* BusStopPredictionsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -693,6 +702,7 @@
 			files = (
 				F4F447652BFAC61600CFBA3A /* GetBusRoutesAPIResponse.swift in Sources */,
 				F4F4479E2BFACF7400CFBA3A /* TrainLineItemView.swift in Sources */,
+				F46FAD5B2BFD735D0079F165 /* BusStopPredictionsView.swift in Sources */,
 				F4F447662BFAC61600CFBA3A /* BusRoutes.swift in Sources */,
 				F4F447672BFAC61600CFBA3A /* TrainLine.swift in Sources */,
 				F4F447682BFAC61600CFBA3A /* TrainStopPredictions.swift in Sources */,
@@ -700,6 +710,7 @@
 				F4F447A12BFACF9500CFBA3A /* TrainStopItemView.swift in Sources */,
 				F4F447922BFAC64F00CFBA3A /* TrainStopEntity.swift in Sources */,
 				F4F447A22BFACF9D00CFBA3A /* TrainPredictionItemView.swift in Sources */,
+				F46FAD5D2BFD75EF0079F165 /* BusRouteDetailView.swift in Sources */,
 				F4F447932BFAC64F00CFBA3A /* BusRouteEntity.swift in Sources */,
 				F4F4476A2BFAC61600CFBA3A /* LocationManager.swift in Sources */,
 				F4F4476B2BFAC61600CFBA3A /* BusDirections.swift in Sources */,
@@ -724,6 +735,7 @@
 				F4F447792BFAC62800CFBA3A /* BusStopPredictionsViewModel.swift in Sources */,
 				F4F4477A2BFAC62800CFBA3A /* TrainStopPredictionsViewModel.swift in Sources */,
 				F4F447702BFAC61600CFBA3A /* BusStopPredictions.swift in Sources */,
+				F46FAD592BFD6F9F0079F165 /* FavoriteTrainStopsView.swift in Sources */,
 				F4F447712BFAC61600CFBA3A /* BusPatterns.swift in Sources */,
 				F4F447722BFAC61600CFBA3A /* GetBusRouteStopsAPIResponse.swift in Sources */,
 				F4F447732BFAC61600CFBA3A /* GetBusRoutePatternsAPIResponse.swift in Sources */,
@@ -932,7 +944,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -965,7 +977,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 10.4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
