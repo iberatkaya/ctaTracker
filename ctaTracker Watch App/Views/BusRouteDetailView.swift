@@ -13,6 +13,8 @@ struct BusRouteDetailView: View {
     @StateObject var viewModel: BusRouteDetailsViewModel
     @State var directionIndex: Int = 0
     @State var mapViewEnabledIndex = 0
+    @Query(sort: \BusStopEntity.stopID) var favoriteBusRouteStops: [BusStopEntity]
+    @Environment(\.modelContext) var modelContext
 
     init(busRoute: BusRoute, viewModel: BusRouteDetailsViewModel? = nil) {
         self.busRoute = busRoute
@@ -62,15 +64,7 @@ struct BusRouteDetailView: View {
                         }) {
                             ForEach(orderBusStops(viewModel.busRouteStops.stops, pattern)) { stop in
                                 NavigationLink(destination: BusStopPredictionsView(busRoute: viewModel.busRoute, stop: stop), label: {
-                                    HStack(spacing: 0) {
-                                        Image(systemName: "circle.fill")
-                                            .font(.system(size: 6)).foregroundColor(Color.black)
-                                            .padding(.trailing, 8)
-                                        Text(stop.name)
-                                            .font(.system(size: 16, weight: .regular))
-                                            .padding(.vertical, 2)
-                                        Spacer()
-                                    }
+                                    BusStopItemView(busStop: stop, isFaved: favoriteBusRouteStops.contains(where: { $0.stopID == stop.stopID }), onSavePress: saveItem, onDeletePress: removeItem)
                                 }).padding(.vertical, 4)
                             }
                         }
@@ -87,6 +81,19 @@ struct BusRouteDetailView: View {
         })
         .padding(.top, 8)
         .padding(.horizontal, 2)
+    }
+    
+    func saveItem(_ item: BusRouteStop) {
+        let entity = item.toDataModel(routeDirection: viewModel.busDirections.directions[self.directionIndex], routeNumber: busRoute.number, routeName: busRoute.name, routeColor: busRoute.color)
+        modelContext.insert(entity)
+        try? modelContext.save()
+    }
+    
+    func removeItem(_ item: BusRouteStop) {
+        let entity = favoriteBusRouteStops.first(where: { $0.stopID == item.stopID })
+        if let entity {
+            modelContext.delete(entity)
+        }
     }
 }
 

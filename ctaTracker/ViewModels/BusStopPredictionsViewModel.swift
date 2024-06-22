@@ -23,13 +23,15 @@ class BusStopPredictionsViewModel: ObservableObject {
     @Environment(\.modelContext) var modelContext
     @Published var predictionsLoading = false
     @Published var noScheduledService = false
-    @Published var didFetchData = false
+    @Published var didFetchDataOnce = false
     let repo = BusRepository()
+    @Published var fetchDate: Date? = nil
     
     func fetchPredictions() async {
-        didFetchData = true
+        didFetchDataOnce = true
         predictionsLoading = true
         noScheduledService = false
+        fetchDate = Date.now
         do {
             if let res = await repo.getRouteStopPredictions(routeNumber: busRoute.number, stopID: stop.stopID)  {
                 busPredictions.predictions = try BusStopPredictions.fromDataObject(data: res).predictions
@@ -44,4 +46,3 @@ class BusStopPredictionsViewModel: ObservableObject {
         }
     }
 }
-

@@ -15,6 +15,9 @@ struct BusRouteDetailView: View {
     @State var directionIndex: Int = 0
     @State var mapViewEnabledIndex = 0
     @State var displayOptions = ["Map", "List"]
+    
+    @Query(sort: \BusStopEntity.stopID) var favoriteBusRouteStops: [BusStopEntity]
+    @Environment(\.modelContext) var modelContext
 
     init(busRoute: BusRoute, viewModel: BusRouteDetailsViewModel? = nil) {
         self.busRoute = busRoute
@@ -80,29 +83,21 @@ struct BusRouteDetailView: View {
                     .padding(.vertical, 4)
                 }.background(.gray.opacity(0.12))
                 
-                TabView(selection: $mapViewEnabledIndex) {
+                if mapViewEnabledIndex == 0 {
                     VStack{
                         BusTransitMapView(busRoute: viewModel.busRoute, stops: viewModel.busRouteStops, patterns: viewModel.busPatterns, direction: viewModel.busDirections.directions.count > 0 ? viewModel.busDirections.directions[directionIndex] : nil)
-                    }.tag(0)
-                    
+                    }
+                } else {
                     VStack(spacing: 0) {
                         List {
                             ForEach(viewModel.busRouteStops.stops) { stop in
                                 NavigationLink(destination: BusStopPredictionsView(busRoute: viewModel.busRoute, stop: stop), label: {
-                                    HStack(spacing: 0) {
-                                        Image(systemName: "circle.fill")
-                                            .font(.system(size: 6)).foregroundColor(Color.black)
-                                            .padding(.trailing, 8)
-                                        Text(stop.name)
-                                            .font(.system(size: 16, weight: .regular))
-                                            .padding(.vertical, 2)
-                                        Spacer()
-                                    }
+                                    BusStopItemView(busStop: stop, isFaved: favoriteBusRouteStops.contains(where: { $0.stopID == stop.stopID }), onSavePress: saveItem, onDeletePress: removeItem)
                                 }).padding(.vertical, 4)
                             }
                         }.padding(.top, -12)
-                    }.tag(1)
-                }.tabViewStyle(.page(indexDisplayMode: .never))
+                    }
+                }
             }
         }.task({
             guard !isPreviewBuilder() else { return }
@@ -113,6 +108,19 @@ struct BusRouteDetailView: View {
             await viewModel.fetchPatterns()
         })
         .padding(.top, 8)
+    }
+    
+    func saveItem(_ item: BusRouteStop) {
+        let entity = item.toDataModel(routeDirection: viewModel.busDirections.directions[self.directionIndex], routeNumber: busRoute.number, routeName: busRoute.name, routeColor: busRoute.color)
+        modelContext.insert(entity)
+        try? modelContext.save()
+    }
+    
+    func removeItem(_ item: BusRouteStop) {
+        let entity = favoriteBusRouteStops.first(where: { $0.stopID == item.stopID })
+        if let entity {
+            modelContext.delete(entity)
+        }
     }
 }
 
