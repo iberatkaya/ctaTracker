@@ -39,6 +39,19 @@ struct BusStopPredictionsView: View {
                         .font(.system(size: 13))
                 }
                 Spacer()
+                
+                Button(action: {
+                    Task {
+                        await viewModel.fetchPredictions()
+                    }
+                }, label: {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.system(size: 14))
+                })
+                .buttonStyle(PlainButtonStyle())
+                .frame(width: 28, height: 28)
+                .background(.gray.opacity(0.4))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
             }
             .padding(.horizontal, 6)
             
@@ -83,10 +96,6 @@ struct BusStopPredictionsView: View {
                         } header: {
                             Text("Predictions").font(.system(size: 14, weight: .semibold))
                                 .padding(.bottom, 2)
-                        }
-                    }.refreshable {
-                        Task {
-                            await viewModel.fetchPredictions()
                         }
                     }
                 }

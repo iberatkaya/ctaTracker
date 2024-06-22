@@ -23,7 +23,7 @@ struct ctaTracker_Watch_AppApp: App {
                 }
         }
         .environmentObject(viewModel.trainStops)
-        .modelContainer(for: [TrainStopEntity.self, BusRouteEntity.self])
+        .modelContainer(for: [TrainStopEntity.self, BusRouteEntity.self, BusStopEntity.self])
         .environmentObject(locationManager)
         .environmentObject(viewModel.trainStops)
     }

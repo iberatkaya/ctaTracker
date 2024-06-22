@@ -62,6 +62,7 @@
 		F4B5F6E42C0BE72E00FA20A7 /* BusStopItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5F6E32C0BE72E00FA20A7 /* BusStopItemView.swift */; };
 		F4B5F6E82C0BF7C900FA20A7 /* BusStopEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5F6E52C0BF7C900FA20A7 /* BusStopEntity.swift */; };
 		F4B5F6EB2C0BF7C900FA20A7 /* BusStopEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5F6E52C0BF7C900FA20A7 /* BusStopEntity.swift */; };
+		F4B5F6EE2C265DE200FA20A7 /* BusStopItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5F6E32C0BE72E00FA20A7 /* BusStopItemView.swift */; };
 		F4DCC5D62BE9B95700681317 /* TrainStopItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DCC5D52BE9B95700681317 /* TrainStopItemView.swift */; };
 		F4DCC5D82BEB103C00681317 /* TrainTransitMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DCC5D72BEB103C00681317 /* TrainTransitMapView.swift */; };
 		F4DCC5E12BEDAD4000681317 /* FavoriteItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DCC5E02BEDAD4000681317 /* FavoriteItemView.swift */; };
@@ -737,6 +738,7 @@
 				F4F447992BFAC95500CFBA3A /* MainView.swift in Sources */,
 				F4F447902BFAC64A00CFBA3A /* TrainRepository.swift in Sources */,
 				F4F447A72BFADEE400CFBA3A /* TrainStopPredictionsView.swift in Sources */,
+				F4B5F6EE2C265DE200FA20A7 /* BusStopItemView.swift in Sources */,
 				F4F447912BFAC64A00CFBA3A /* BusRepository.swift in Sources */,
 				F4F4476E2BFAC61600CFBA3A /* GetBusStopPredictionsAPIResponse.swift in Sources */,
 				F4F447742BFAC61800CFBA3A /* GetTrainArrivalsAPIResponse.swift in Sources */,
