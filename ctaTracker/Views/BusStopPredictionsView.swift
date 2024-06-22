@@ -79,7 +79,6 @@ struct BusStopPredictionsView: View {
         }
         .background(Color(UIColor.systemGray6))
         .onAppear(perform: {
-            print("on appear")
             viewModel.busRoute = busRoute
             viewModel.stop = stop
             Task {

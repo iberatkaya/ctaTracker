@@ -32,7 +32,6 @@ class BusStopPredictionsViewModel: ObservableObject {
         predictionsLoading = true
         noScheduledService = false
         fetchDate = Date.now
-        print("fetch data")
         do {
             if let res = await repo.getRouteStopPredictions(routeNumber: busRoute.number, stopID: stop.stopID)  {
                 busPredictions.predictions = try BusStopPredictions.fromDataObject(data: res).predictions
