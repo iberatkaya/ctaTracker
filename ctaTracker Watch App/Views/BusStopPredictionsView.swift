@@ -20,7 +20,8 @@ struct BusStopPredictionsView: View {
     }
     
     @State private var currentDate = Date.now
-    let timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
+    let countdownTimer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
+    let refreshTimer = Timer.publish(every: 90, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -66,7 +67,7 @@ struct BusStopPredictionsView: View {
                                         if let pred = try? timestampDiffFromNowInMinutes(date: prediction.prediction, type: .bus, curDate: currentDate) {
                                             Text(pred > 0 ? (String(pred) + " mins left") : "Arriving soon")
                                                 .font(.system(size: 11, weight: .regular)).padding(0)
-                                                .onReceive(timer) { input in
+                                                .onReceive(countdownTimer) { input in
                                                     currentDate = input
                                                 }
                                         }
@@ -83,6 +84,10 @@ struct BusStopPredictionsView: View {
                             Text("Predictions").font(.system(size: 14, weight: .semibold))
                                 .padding(.bottom, 2)
                         }
+                    }.refreshable {
+                        Task {
+                            await viewModel.fetchPredictions()
+                        }
                     }
                 }
             }
@@ -93,10 +98,16 @@ struct BusStopPredictionsView: View {
             viewModel.stop = stop
             Task {
                 guard !isPreviewBuilder() else { return }
-                if (viewModel.didFetchData) { return }
+                if (viewModel.didFetchDataOnce) { return }
                 await viewModel.fetchPredictions()
             }
         })
+        .onReceive(refreshTimer) { _ in
+            Task {
+                guard !isPreviewBuilder() else { return }
+                await viewModel.fetchPredictions()
+            }
+        }
     }
 }
 

@@ -5,6 +5,16 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="number" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="BusStopEntity" representedClassName="BusStopEntity" syncable="YES">
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="routeColor" optional="YES" attributeType="String"/>
+        <attribute name="routeDirection" optional="YES" attributeType="String"/>
+        <attribute name="routeName" optional="YES" attributeType="String"/>
+        <attribute name="routeNumber" optional="YES" attributeType="String"/>
+        <attribute name="stopID" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="TrainStopEntity" representedClassName="TrainStopEntity" syncable="YES">
         <attribute name="mapID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="stationDescription" optional="YES" attributeType="String"/>

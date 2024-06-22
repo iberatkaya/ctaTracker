@@ -12,6 +12,7 @@ import ActivityIndicatorView
 struct BusRoutesView: View {
     @EnvironmentObject var busRoutes: BusRoutes
     @Query(sort: \BusRouteEntity.number) var favoriteBusRoutes: [BusRouteEntity]
+    @Query(sort: \BusStopEntity.stopID) var favoriteBusStops: [BusStopEntity]
     @Environment(\.modelContext) var modelContext
     @StateObject var viewModel = BusRoutesViewModel(routes: [])
     
@@ -23,8 +24,20 @@ struct BusRoutesView: View {
             }
             else {
                 List {
+                    if (!favoriteBusStops.isEmpty){
+                        Section(header: Text("Favorite Stops")) {
+                            ForEach(favoriteBusStops, id: \.stopID) { stopData in
+                                let stop = BusRouteStop.fromDataObject(data: stopData)
+                                
+                                NavigationLink(destination: BusStopPredictionsView(busRoute: BusRoute(number: stopData.routeNumber, name: stopData.routeName, color: stopData.routeColor), stop: stop), label: {
+                                    BusStopItemView(busStop: stop, isFaved: true, title: "\(stop.name)\n\(stopData.routeNumber) \(stopData.routeDirection)", onDeletePress: removeStopItem)
+                                })
+                            }
+                        }
+                    }
+                    
                     if (!favoriteBusRoutes.isEmpty){
-                        Section(header: Text("Favorites")) {
+                        Section(header: Text("Favorite Routes")) {
                             ForEach(favoriteBusRoutes.sorted(by: { a, b in
                                 let aNumArr = parseNumbersFromString(a.number)
                                 let bNumArr = parseNumbersFromString(b.number)
@@ -34,7 +47,7 @@ struct BusRoutesView: View {
                                 return true
                             }).map({ BusRoute.fromDataObject(data: $0) }), id: \.number) { route in
                                 NavigationLink(destination: BusRouteDetailView(busRoute: route), label: {
-                                    BusRouteItemView(route: route, onSavePress: saveItem, onDeletePress: removeItem, isFaved: favoriteBusRoutes.map({ $0.number }).contains(route.number))
+                                    BusRouteItemView(route: route, onSavePress: saveRouteItem, onDeletePress: removeRouteItem, isFaved: favoriteBusRoutes.map({ $0.number }).contains(route.number))
                                 })
                             }
                         }
@@ -43,7 +56,7 @@ struct BusRoutesView: View {
                     Section(header: Text("All Routes")) {
                         ForEach(busRoutes.routes, id: \.number) { route in
                             NavigationLink(destination: BusRouteDetailView(busRoute: route), label: {
-                                BusRouteItemView(route: route, onSavePress: saveItem, onDeletePress: removeItem, isFaved: favoriteBusRoutes.map({ $0.number }).contains(route.number))
+                                BusRouteItemView(route: route, onSavePress: saveRouteItem, onDeletePress: removeRouteItem, isFaved: favoriteBusRoutes.map({ $0.number }).contains(route.number))
                             })
                         }
                     }
@@ -59,13 +72,20 @@ struct BusRoutesView: View {
         .navigationBarTitle("Bus Tracker", displayMode: .inline)
     }
     
-    func saveItem(_ item: BusRoute) {
+    func removeStopItem(_ item: BusRouteStop) {
+        let entity = favoriteBusStops.first(where: { $0.stopID == item.stopID })
+        if let entity {
+            modelContext.delete(entity)
+        }
+    }
+    
+    func saveRouteItem(_ item: BusRoute) {
         let entity = item.toDataModel()
         modelContext.insert(entity)
         try? modelContext.save()
     }
     
-    func removeItem(_ item: BusRoute) {
+    func removeRouteItem(_ item: BusRoute) {
         let entity = favoriteBusRoutes.first(where: { $0.number == item.number })
         if let entity {
             modelContext.delete(entity)

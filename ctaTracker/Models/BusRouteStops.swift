@@ -29,4 +29,13 @@ class BusRouteStop: ObservableObject, Identifiable {
     
     let stopID, name: String
     let lat, lon: Double
+    
+    func toDataModel(routeDirection: String, routeNumber: String, routeName: String, routeColor: String) -> BusStopEntity {
+        let entity = BusStopEntity(stopID: stopID, name: name, lat: lat, lon: lon, routeDirection: routeDirection, routeNumber: routeNumber, routeName: routeName, routeColor: routeColor)
+        return entity
+    }
+    
+    static func fromDataObject(data: BusStopEntity) -> BusRouteStop {
+        return BusRouteStop(stopID: data.stopID, name: data.name, lat: data.lat, lon: data.lon)
+    }
 }

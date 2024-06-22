@@ -45,7 +45,9 @@ struct ctaTrackerApp: App {
                 await viewModel.loadJSON()
             }
         }
-        .modelContainer(for: [TrainStopEntity.self, BusRouteEntity.self])
+        .modelContainer(for: [TrainStopEntity.self, BusRouteEntity.self, BusStopEntity.self]) { result in
+            print(result)
+        }
         .environmentObject(locationManager)
         .environmentObject(viewModel.trainStops)
     }
