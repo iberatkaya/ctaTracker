@@ -21,7 +21,8 @@ struct ctaTrackerApp: App {
     
     @StateObject var locationManager = LocationManager()
     @StateObject var viewModel = MainViewModel()
-    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     var body: some Scene {
         WindowGroup {
             TabView {

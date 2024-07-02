@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ActivityIndicatorView
+import AppIntents
 
 struct BusStopPredictionsView: View {
     let busRoute: BusRoute
@@ -24,6 +25,8 @@ struct BusStopPredictionsView: View {
     let countdownTimer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
     let refreshTimer = Timer.publish(every: 90, on: .main, in: .common).autoconnect()
     
+    @State var isVisible = true
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -39,6 +42,10 @@ struct BusStopPredictionsView: View {
                         .font(.system(size: 15))
                 }
                 Spacer()
+                Text("ID: \(stop.stopID)")
+                    .font(.system(size: 12))
+                    .scaledToFit()
+                    .minimumScaleFactor(0.8)
             }.padding(.horizontal, 24)
             .padding(.bottom, 12)
             .background(Color.white)
@@ -76,6 +83,10 @@ struct BusStopPredictionsView: View {
                 }
             }
             Spacer()
+            
+            ShortcutsLink()
+                .shortcutsLinkStyle(.lightOutline)
+                .padding(.bottom, 4)
         }
         .background(Color(UIColor.systemGray6))
         .onAppear(perform: {
