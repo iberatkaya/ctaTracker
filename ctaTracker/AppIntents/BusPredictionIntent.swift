@@ -44,7 +44,7 @@ struct BusPredictionShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: BusPredictionIntent(),
             phrases: [
-                "Get bus predictions 1in \(.applicationName)",
+                "Get bus predictions in \(.applicationName)",
             ],
             shortTitle: "Get bus predictions",
             systemImageName: "clock.fill"

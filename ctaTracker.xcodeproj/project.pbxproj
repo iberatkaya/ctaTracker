@@ -60,7 +60,7 @@
 		F48AA8062BF060F40084E0B9 /* stations.json in Resources */ = {isa = PBXBuildFile; fileRef = F48AA8052BF060F40084E0B9 /* stations.json */; };
 		F48AA8082BF061220084E0B9 /* TrainStopEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48AA8072BF061220084E0B9 /* TrainStopEntity.swift */; };
 		F4B5B4422C2A57EB0082CF82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5B4412C2A57EB0082CF82 /* AppDelegate.swift */; };
-		F4B5B46B2C2F9AF40082CF82 /* BusPredictionAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5B46A2C2F9AF40082CF82 /* BusPredictionAppIntent.swift */; };
+		F4B5B46B2C2F9AF40082CF82 /* BusPredictionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5B46A2C2F9AF40082CF82 /* BusPredictionIntent.swift */; };
 		F4B5F6E42C0BE72E00FA20A7 /* BusStopItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5F6E32C0BE72E00FA20A7 /* BusStopItemView.swift */; };
 		F4B5F6E82C0BF7C900FA20A7 /* BusStopEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5F6E52C0BF7C900FA20A7 /* BusStopEntity.swift */; };
 		F4B5F6EB2C0BF7C900FA20A7 /* BusStopEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5F6E52C0BF7C900FA20A7 /* BusStopEntity.swift */; };
@@ -226,7 +226,7 @@
 		F4B5B4412C2A57EB0082CF82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4B5B4482C2A5A220082CF82 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		F4B5B4532C2A5A220082CF82 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
-		F4B5B46A2C2F9AF40082CF82 /* BusPredictionAppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusPredictionAppIntent.swift; sourceTree = "<group>"; };
+		F4B5B46A2C2F9AF40082CF82 /* BusPredictionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusPredictionIntent.swift; sourceTree = "<group>"; };
 		F4B5F6E32C0BE72E00FA20A7 /* BusStopItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopItemView.swift; sourceTree = "<group>"; };
 		F4B5F6E52C0BF7C900FA20A7 /* BusStopEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BusStopEntity.swift; path = ctaTracker/CoreDataEntities/BusStopEntity.swift; sourceTree = SOURCE_ROOT; };
 		F4DCC5D52BE9B95700681317 /* TrainStopItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainStopItemView.swift; sourceTree = "<group>"; };
@@ -432,7 +432,7 @@
 		F4B5B4692C2F9AD90082CF82 /* AppIntents */ = {
 			isa = PBXGroup;
 			children = (
-				F4B5B46A2C2F9AF40082CF82 /* BusPredictionAppIntent.swift */,
+				F4B5B46A2C2F9AF40082CF82 /* BusPredictionIntent.swift */,
 			);
 			path = AppIntents;
 			sourceTree = "<group>";
@@ -695,7 +695,7 @@
 				F48AA7FA2BEFC5BE0084E0B9 /* LocationManager.swift in Sources */,
 				F486492E2BF6E0E8004C3B32 /* BusPatterns.swift in Sources */,
 				F4DCC5E32BEDADE700681317 /* FavoriteTrainStopsView.swift in Sources */,
-				F4B5B46B2C2F9AF40082CF82 /* BusPredictionAppIntent.swift in Sources */,
+				F4B5B46B2C2F9AF40082CF82 /* BusPredictionIntent.swift in Sources */,
 				F41947342BDD5F83000F374B /* GetBusStopPredictionsAPIResponse.swift in Sources */,
 				F43AC30D2BD751CE0093767E /* MainBusView.swift in Sources */,
 				F48AA7FE2BEFD71D0084E0B9 /* MapViewContainer.swift in Sources */,
